@@ -1,0 +1,40 @@
+$primary-color: #000000; 
+$secondary-color: #FFFFFF; 
+$accent-color: #D1D1D1; 
+$highlight-color: #FF5733; 
+$background-light: #F8F9FA; 
+
+$font-family-base: 'Roboto', sans-serif;
+
+body {
+  font-family: $font-family-base;
+  color: $primary-color;
+  background-color: $secondary-color;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: $primary-color;
+  color: $secondary-color;
+  padding: 1rem;
+}
+
+button {
+  background-color: $primary-color;
+  color: $secondary-color;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: $accent-color;
+    color: $primary-color;
+  }
+}
+
+.mat-toolbar {
+  background-color: $primary-color;
+  color: $secondary-color;
+}
