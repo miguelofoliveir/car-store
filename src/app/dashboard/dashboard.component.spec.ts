@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -12,7 +13,7 @@ describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      imports: [MatCardModule, MatButtonModule, NgxChartsModule],
+      imports: [MatCardModule, MatButtonModule, NgxChartsModule, BrowserAnimationsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
