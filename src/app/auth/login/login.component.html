@@ -1,0 +1,22 @@
+<div class="flex justify-center items-center h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-96">
+      <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
+      <div *ngIf="error" class="text-red-500 mb-4">
+        {{ error }}
+      </div>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <mat-form-field appearance="fill" class="w-full mb-4">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" name="email" [(ngModel)]="email" required />
+          <mat-error *ngIf="loginForm.submitted && !email">O email é obrigatório</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full mb-6">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" name="password" [(ngModel)]="password" required />
+          <mat-error *ngIf="loginForm.submitted && !password">A senha é obrigatória</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" class="w-full">Entrar</button>
+      </form>
+    </div>
+  </div>
+  
