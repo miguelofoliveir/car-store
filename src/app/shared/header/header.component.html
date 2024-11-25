@@ -1,0 +1,92 @@
+<header class="flex items-center justify-between lg:p-6 p-4 shadow-md bg-black">
+  <a
+    href="#"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex items-start w-full h-8"
+  >
+    <picture class="w-36 h-full">
+      <source
+        type="image/webp"
+        srcset="
+          https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid.png.webp          1600w,
+          https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid-300x45.png.webp    300w,
+          https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid-1024x154.png.webp 1024w,
+          https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid-768x115.png.webp   768w,
+          https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid-1536x230.png.webp 1536w
+        "
+        sizes="(max-width: 1600px) 100vw, 1600px"
+      />
+      <img
+        class="h-full object-contain"
+        fetchpriority="high"
+        width="1600"
+        height="240"
+        src="https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid.png"
+        alt="AMX Healthcare Logo"
+      />
+    </picture>
+  </a>
+  <button
+    class="md:hidden flex items-center text-white"
+    (click)="isMenuOpen = !isMenuOpen"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M4 6h16M4 12h16m-7 6h7"
+      />
+    </svg>
+  </button>
+  <nav class="hidden md:flex items-center gap-10 lg:px-10 px-0">
+    <ng-container *ngFor="let item of menuItems">
+      <a
+        *ngIf="canShow(item)"
+        [routerLink]="item.link"
+        class="text-white hover:text-gray-300"
+      >
+        {{ item.label }}
+      </a>
+    </ng-container>
+  </nav>
+  <div class="hidden lg:block">
+    <button
+      mat-raised-button
+      color="warn"
+      class="px-4 py-2 font-bold text-sm md:text-base"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </div>
+  <div
+    *ngIf="isMenuOpen"
+    class="absolute top-14 left-0 w-full bg-black z-50 flex flex-col items-start p-4 space-y-4 md:hidden"
+  >
+    <ng-container *ngFor="let item of menuItems">
+      <a
+        *ngIf="canShow(item)"
+        [routerLink]="item.link"
+        class="text-white hover:text-gray-300"
+      >
+        {{ item.label }}
+      </a>
+    </ng-container>
+    <button
+      mat-raised-button
+      color="warn"
+      class="w-full px-4 py-2 font-bold text-sm"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </div>
+</header>
