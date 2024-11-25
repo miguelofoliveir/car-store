@@ -1,0 +1,31 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Product 1",
+      "brand": "Brand A",
+      "price": 100,
+      "description": "Description of Product 1",
+      "category": "Category A",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "2",
+      "name": "Product 2",
+      "brand": "Brand B",
+      "price": 200,
+      "description": "Description of Product 2",
+      "category": "Category B",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "002d",
+      "name": "Lamborghini",
+      "brand": "Brand test",
+      "price": 5000000,
+      "description": "Teste Description",
+      "category": "Luxury car",
+      "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg"
+    }
+  ]
+}

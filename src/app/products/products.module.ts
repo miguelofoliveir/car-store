@@ -11,14 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
 @NgModule({
-  declarations: [
-    ProductsComponent,
-    ListComponent,
-    FormComponent
-  ],
+  declarations: [ProductsComponent, ListComponent, FormComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,
@@ -28,6 +22,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatInputModule,
     MatCardModule,
-  ]
+  ],
 })
-export class ProductsModule { }
+export class ProductsModule {}
