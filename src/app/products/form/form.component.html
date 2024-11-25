@@ -1,0 +1,73 @@
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">
+    {{ isEditMode ? "Edit Product" : "Add Product" }}
+  </h2>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter product name" />
+      <mat-error *ngIf="productForm.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Brand</mat-label>
+      <input matInput formControlName="brand" placeholder="Enter brand name" />
+      <mat-error *ngIf="productForm.get('brand')?.hasError('required')">
+        Brand is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        formControlName="price"
+        type="number"
+        placeholder="Enter product price"
+      />
+      <mat-error *ngIf="productForm.get('price')?.hasError('required')">
+        Price is required
+      </mat-error>
+      <mat-error *ngIf="productForm.get('price')?.hasError('min')">
+        Price must be greater than or equal to 0
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Enter product description"
+        rows="4"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Category</mat-label>
+      <input
+        matInput
+        formControlName="category"
+        placeholder="Enter product category"
+      />
+      <mat-error *ngIf="productForm.get('category')?.hasError('required')">
+        Category is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Image URL</mat-label>
+      <input matInput formControlName="image" placeholder="Enter image URL" />
+    </mat-form-field>
+    <div class="flex justify-end gap-4">
+      <button mat-button type="button" color="warn" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="productForm.invalid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>
