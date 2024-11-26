@@ -41,9 +41,8 @@ export class DetailsComponent implements OnInit {
         let insufficientStock = false;
 
         this.order.products.forEach((product) => {
-          const idProdutStrig = product.id.toString();
           this.ordersService
-            .getProductById(idProdutStrig)
+            .getProductById(product.id)
             .subscribe((dbProduct) => {
               const currentStock = dbProduct.quantity;
               const purchasedQuantity =
