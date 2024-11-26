@@ -19,7 +19,7 @@ export class HeaderComponent {
     },
     { label: 'Produts', link: '/products', roles: ['admin', 'seller'] },
     { label: 'Orders', link: '/orders', roles: ['admin', 'seller', 'client'] },
-    { label: 'Clients', link: '/clients', roles: ['admin', 'seller'] },
+    { label: 'Clients', link: '/client', roles: ['admin', 'seller'] },
     { label: 'Stock', link: '/stock', roles: ['admin', 'seller'] },
     { label: 'Users', link: '/users', roles: ['admin'] },
   ];

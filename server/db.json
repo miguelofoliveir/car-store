@@ -243,16 +243,24 @@
   ],
   "clients": [
     {
-      "id": "101",
       "name": "Hamilton",
       "email": "hamilton@example.com",
-      "phone": "123-456-7890"
+      "phone": "123-456-7890",
+      "address": "New York",
+      "id": "101"
     },
     {
       "id": "102",
       "name": "Miguel test",
       "email": "miguel@example.com",
       "phone": "987-654-3210"
+    },
+    {
+      "name": "Cintia",
+      "email": "cintia02@gmail.com",
+      "phone": "98989898989",
+      "address": "Street 02",
+      "id": "d01b"
     }
   ]
 }
