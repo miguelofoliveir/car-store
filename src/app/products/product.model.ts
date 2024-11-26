@@ -1,7 +1,5 @@
-import { InjectionToken } from '@angular/core';
-
 export interface Product {
-  id?: number;
+  id: number;
   name: string;
   brand: string;
   price: number;
@@ -10,5 +8,3 @@ export interface Product {
   image: string;
   quantity: number;
 }
-
-export const PRODUCT_TOKEN = new InjectionToken<Product>('Product');

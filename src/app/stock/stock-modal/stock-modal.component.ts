@@ -36,11 +36,11 @@ export class StockModalComponent {
     this.stockService
       .updateProductQuantity(this.product.id!, updatedQuantity)
       .subscribe(() => {
-        this.dialogRef.close(true); // Fecha o modal e sinaliza sucesso
+        this.dialogRef.close(true); 
       });
   }
 
   onCancel(): void {
-    this.dialogRef.close(false); // Fecha o modal sem alterações
+    this.dialogRef.close(false); 
   }
 }

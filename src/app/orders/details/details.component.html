@@ -1,0 +1,43 @@
+<div *ngIf="order" class="p-4 bg-gray-100 container mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Order Details</h2>
+  <div class="space-y-4 bg-white p-4 shadow rounded">
+    <div><strong>Client:</strong> {{ order.client }}</div>
+    <div><strong>Date:</strong> {{ order.date | date }}</div>
+    <div><strong>Status:</strong> {{ order.status }}</div>
+    <div>
+      <strong>Products:</strong>
+      <ul class="list-disc list-inside">
+        <li *ngFor="let product of order?.products">
+          {{ product?.name }} - {{ product?.quantity }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-6 flex justify-between items-center">
+      <button mat-stroked-button color="primary" routerLink="/orders">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Orders
+      </button>
+      <div class="flex gap-4">
+        <button
+          *ngIf="order.status !== 'Completed'"
+          mat-raised-button
+          color="primary"
+          (click)="changeStatus('Completed')"
+        >
+          <mat-icon>check_circle</mat-icon>
+          Mark as Completed
+        </button>
+        <button
+          *ngIf="order.status !== 'Canceled'"
+          mat-raised-button
+          color="warn"
+          (click)="changeStatus('Canceled')"
+        >
+          <mat-icon>cancel</mat-icon>
+          Mark as Canceled
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

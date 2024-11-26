@@ -1,0 +1,64 @@
+<div class="p-4 bg-gray-100 max-w-lg mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Create Order</h2>
+  <form [formGroup]="orderForm" (ngSubmit)="onSave()">
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Client</mat-label>
+      <mat-select formControlName="clientId">
+        <mat-option *ngFor="let client of clients" [value]="client.id">
+          {{ client.name }} ({{ client.email }})
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="orderForm.get('clientId')?.hasError('required')">
+        Client is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Product</mat-label>
+      <mat-select formControlName="productId">
+        <mat-option *ngFor="let product of products" [value]="product.id">
+          {{ product.name }} (Stock: {{ product.quantity }})
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="orderForm.get('productId')?.hasError('required')">
+        Product is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Quantity</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="quantity"
+        placeholder="Enter quantity"
+      />
+      <mat-error *ngIf="orderForm.get('quantity')?.hasError('required')">
+        Quantity is required
+      </mat-error>
+      <mat-error *ngIf="orderForm.get('quantity')?.hasError('min')">
+        Quantity must be at least 1
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="Pending">Pending</mat-option>
+        <mat-option value="Completed">Completed</mat-option>
+        <mat-option value="Canceled">Canceled</mat-option>
+      </mat-select>
+      <mat-error *ngIf="orderForm.get('status')?.hasError('required')">
+        Status is required
+      </mat-error>
+    </mat-form-field>
+    <div class="flex justify-end gap-4">
+      <button mat-button color="warn" (click)="onCancel()">Cancel</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="orderForm.invalid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>
