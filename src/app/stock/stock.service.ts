@@ -16,7 +16,7 @@ export class StockService {
   }
 
   updateProductQuantity(
-    productId: number,
+    productId: string,
     quantity: number
   ): Observable<Product> {
     return this.http.patch<Product>(`${this.apiUrl}/${productId}`, {

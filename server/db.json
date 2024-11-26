@@ -8,7 +8,7 @@
       "description": "Description of Product 1",
       "category": "Category A",
       "image": "https://portal.euqueroinvestir.com/wp-content/uploads/2024/07/carros-de-luxo-destaque.jpg",
-      "quantity": 49
+      "quantity": 1
     },
     {
       "id": "003d",
@@ -18,7 +18,7 @@
       "description": "Description of Product 2",
       "category": "Category B",
       "image": "https://forbes.com.br/wp-content/uploads/2020/08/Neg%C3%B3cios-CarrosdeLuxo-180820-Divulga%C3%A7%C3%A3o9-1.jpg",
-      "quantity": 10
+      "quantity": 9
     },
     {
       "id": "002d",
@@ -28,7 +28,7 @@
       "description": "Teste Description",
       "category": "Luxury car",
       "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
-      "quantity": 5
+      "quantity": 4
     },
     {
       "id": "dd4b",
@@ -39,6 +39,220 @@
       "category": "Test product",
       "image": "https://nxboats.com.br/wp-content/uploads/2023/11/bugatti.jpg",
       "quantity": 9
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "client": "Hamilton",
+      "products": [
+        {
+          "id": "001d",
+          "name": "Product 1",
+          "brand": "Brand A",
+          "price": 100,
+          "description": "Description of Product 1",
+          "category": "Category A",
+          "image": "https://portal.euqueroinvestir.com/wp-content/uploads/2024/07/carros-de-luxo-destaque.jpg",
+          "quantity": 2
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "7f72",
+      "client": "Miguel test",
+      "products": [
+        {
+          "id": "003d",
+          "name": "Product 2",
+          "brand": "Brand B",
+          "price": 200,
+          "description": "Description of Product 2",
+          "category": "Category B",
+          "image": "https://forbes.com.br/wp-content/uploads/2020/08/Neg%C3%B3cios-CarrosdeLuxo-180820-Divulga%C3%A7%C3%A3o9-1.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "f51b",
+      "client": "Miguel test",
+      "products": [
+        {
+          "id": "002d",
+          "name": "Lamborghini",
+          "brand": "Brand test",
+          "price": 5000000,
+          "description": "Teste Description",
+          "category": "Luxury car",
+          "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "b788",
+      "client": "Miguel test",
+      "products": [
+        {
+          "id": "003d",
+          "name": "Product 2",
+          "brand": "Brand B",
+          "price": 200,
+          "description": "Description of Product 2",
+          "category": "Category B",
+          "image": "https://forbes.com.br/wp-content/uploads/2020/08/Neg%C3%B3cios-CarrosdeLuxo-180820-Divulga%C3%A7%C3%A3o9-1.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "acb9",
+      "client": "Hamilton",
+      "products": [
+        {
+          "id": "002d",
+          "name": "Lamborghini",
+          "brand": "Brand test",
+          "price": 5000000,
+          "description": "Teste Description",
+          "category": "Luxury car",
+          "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "e5ad",
+      "client": "Hamilton",
+      "products": [
+        {
+          "id": "002d",
+          "name": "Lamborghini",
+          "brand": "Brand test",
+          "price": 5000000,
+          "description": "Teste Description",
+          "category": "Luxury car",
+          "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
+          "quantity": 2
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "ba1e",
+      "client": "Hamilton",
+      "products": [
+        {
+          "id": "002d",
+          "name": "Lamborghini",
+          "brand": "Brand test",
+          "price": 5000000,
+          "description": "Teste Description",
+          "category": "Luxury car",
+          "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "c898",
+      "client": "Hamilton",
+      "products": [
+        {
+          "id": "002d",
+          "name": "Lamborghini",
+          "brand": "Brand test",
+          "price": 5000000,
+          "description": "Teste Description",
+          "category": "Luxury car",
+          "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "55a3",
+      "client": "Miguel test",
+      "products": [
+        {
+          "id": "002d",
+          "name": "Lamborghini",
+          "brand": "Brand test",
+          "price": 5000000,
+          "description": "Teste Description",
+          "category": "Luxury car",
+          "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "fdb9",
+      "client": "Hamilton",
+      "products": [
+        {
+          "id": "002d",
+          "name": "Lamborghini",
+          "brand": "Brand test",
+          "price": 5000000,
+          "description": "Teste Description",
+          "category": "Luxury car",
+          "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    },
+    {
+      "id": "777c",
+      "client": "Miguel test",
+      "products": [
+        {
+          "id": "002d",
+          "name": "Lamborghini",
+          "brand": "Brand test",
+          "price": 5000000,
+          "description": "Teste Description",
+          "category": "Luxury car",
+          "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-26",
+      "status": "Completed"
+    }
+  ],
+  "clients": [
+    {
+      "id": "101",
+      "name": "Hamilton",
+      "email": "hamilton@example.com",
+      "phone": "123-456-7890"
+    },
+    {
+      "id": "102",
+      "name": "Miguel test",
+      "email": "miguel@example.com",
+      "phone": "987-654-3210"
     }
   ]
 }

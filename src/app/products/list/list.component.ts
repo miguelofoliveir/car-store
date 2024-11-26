@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from '../products.service';
-import { PRODUCT_TOKEN, Product } from '../product.model';
+import { Product } from '../product.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { DetailsComponent } from '../details/details.component';
