@@ -1,22 +1,22 @@
 {
   "products": [
     {
-      "id": "1",
       "name": "Product 1",
       "brand": "Brand A",
       "price": 100,
       "description": "Description of Product 1",
       "category": "Category A",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://portal.euqueroinvestir.com/wp-content/uploads/2024/07/carros-de-luxo-destaque.jpg",
+      "id": "1"
     },
     {
-      "id": "2",
       "name": "Product 2",
       "brand": "Brand B",
       "price": 200,
       "description": "Description of Product 2",
       "category": "Category B",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://forbes.com.br/wp-content/uploads/2020/08/Neg%C3%B3cios-CarrosdeLuxo-180820-Divulga%C3%A7%C3%A3o9-1.jpg",
+      "id": "2"
     },
     {
       "id": "002d",
@@ -26,6 +26,15 @@
       "description": "Teste Description",
       "category": "Luxury car",
       "image": "https://nxboats.com.br/wp-content/uploads/2023/11/Lamborghini.jpg"
+    },
+    {
+      "id": "dd4b",
+      "name": "Test product 4",
+      "brand": "Test Brand",
+      "price": 5932000,
+      "description": "Test Product",
+      "category": "Test product",
+      "image": "https://nxboats.com.br/wp-content/uploads/2023/11/bugatti.jpg"
     }
   ]
 }

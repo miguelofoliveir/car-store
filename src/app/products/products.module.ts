@@ -10,9 +10,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DetailsComponent } from './details/details.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
-  declarations: [ProductsComponent, ListComponent, FormComponent],
+  declarations: [
+    ProductsComponent,
+    ListComponent,
+    FormComponent,
+    DetailsComponent,
+  ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
@@ -22,6 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatInputModule,
     MatCardModule,
+    MatSelectModule,
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
   ],
 })
 export class ProductsModule {}

@@ -7,12 +7,13 @@ import { Product } from '../product.model';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
   productForm!: FormGroup;
   isEditMode = false;
   productId: number | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -28,15 +29,35 @@ export class FormComponent implements OnInit {
       price: [0, [Validators.required, Validators.min(0)]],
       description: [''],
       category: ['', [Validators.required]],
-      image: ['']
+      image: [''],
+      imageFile: [null],
     });
 
     this.productId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.productId) {
       this.isEditMode = true;
-      this.productsService.getProductById(this.productId).subscribe((product: Product) => {
-        this.productForm.patchValue(product);
-      });
+      this.productsService
+        .getProductById(this.productId)
+        .subscribe((product: Product) => {
+          this.productForm.patchValue(product);
+          if (product.image) {
+            this.imagePreview = product.image;
+          }
+        });
+    }
+  }
+
+  onFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.productForm.patchValue({ image: file });
+      this.productForm.get('image')?.updateValueAndValidity();
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -48,9 +69,11 @@ export class FormComponent implements OnInit {
     const productData: Product = this.productForm.value;
 
     if (this.isEditMode && this.productId) {
-      this.productsService.updateProduct(this.productId, productData).subscribe(() => {
-        this.router.navigate(['/products']);
-      });
+      this.productsService
+        .updateProduct(this.productId, productData)
+        .subscribe(() => {
+          this.router.navigate(['/products']);
+        });
     } else {
       this.productsService.addProduct(productData).subscribe(() => {
         this.router.navigate(['/products']);
