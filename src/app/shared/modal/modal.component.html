@@ -1,0 +1,17 @@
+<div class="relative p-4 bg-white rounded-md shadow-md">
+  <div class="flex justify-end">
+    <button
+      mat-icon-button
+      mat-dialog-close
+      aria-label="Close"
+      class="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <ng-container
+      *ngComponentOutlet="data.component; injector: createInjector()"
+    ></ng-container>
+  </div>
+</div>

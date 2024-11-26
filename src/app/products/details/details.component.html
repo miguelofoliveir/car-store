@@ -1,0 +1,40 @@
+<div class="p-6 bg-white rounded-lg shadow-lg max-w-lg h-full mx-auto">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">
+    Product Details
+  </h2>
+
+  <div *ngIf="product" class="space-y-6">
+    <div class="flex items-center">
+      <strong class="w-32 text-gray-600">Name:</strong>
+      <span class="text-gray-900 font-medium">{{ product.name }}</span>
+    </div>
+    <div class="flex items-center">
+      <strong class="w-32 text-gray-600">Brand:</strong>
+      <span class="text-gray-900 font-medium">{{ product.brand }}</span>
+    </div>
+    <div class="flex items-center">
+      <strong class="w-32 text-gray-600">Price:</strong>
+      <span class="text-gray-900 font-medium">{{
+        product.price | currency
+      }}</span>
+    </div>
+    <div class="flex items-start">
+      <strong class="w-32 text-gray-600">Description:</strong>
+      <p class="text-gray-900">{{ product.description }}</p>
+    </div>
+    <div class="flex items-center">
+      <strong class="w-32 text-gray-600">Category:</strong>
+      <span class="text-gray-900 font-medium">{{ product.category }}</span>
+    </div>
+    <div class="flex items-start">
+      <strong class="w-32 text-gray-600">Image:</strong>
+      <div *ngIf="product.image" class="mt-2">
+        <img
+          [src]="product.image"
+          alt="Product Image"
+          class="h-32 w-32 object-cover rounded-md border border-gray-300"
+        />
+      </div>
+    </div>
+  </div>
+</div>
