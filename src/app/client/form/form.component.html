@@ -1,1 +1,56 @@
-<p>form works!</p>
+<div class="p-4 bg-gray-100 container mx-auto h-screen">
+    <div class="container max-w-2xl bg-gray-50 p-8">
+      <h2 class="text-2xl font-bold mb-4">{{ isEditing ? 'Edit Client' : 'Add Client' }}</h2>
+    <form [formGroup]="clientForm" (ngSubmit)="onSave()">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter name" />
+        <mat-error *ngIf="clientForm.get('name')?.hasError('required')">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Enter email" />
+        <mat-error *ngIf="clientForm.get('email')?.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="clientForm.get('email')?.hasError('email')">
+          Please enter a valid email
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Phone</mat-label>
+        <input
+          matInput
+          formControlName="phone"
+          mask="(00) 00000-0000"
+          placeholder="(99) 99999-9999"
+        />
+        <mat-error *ngIf="clientForm.get('phone')?.hasError('required')">
+          Phone is required
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" placeholder="Enter address" />
+      </mat-form-field>
+  
+      <div class="flex justify-end gap-4 mt-4">
+        <button mat-button color="warn" (click)="onCancel()">Cancel</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="clientForm.invalid"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+    </div>
+  </div>
+  
