@@ -1,0 +1,66 @@
+<div class="p-4 bg-gray-100">
+  <h2 class="text-2xl font-bold mb-4">Stock Management</h2>
+  <div class="flex flex-wrap gap-4 mb-4">
+    <mat-form-field appearance="fill" class="w-1/4">
+      <mat-label>Search by Name</mat-label>
+      <input matInput [(ngModel)]="filters.name" (input)="applyFilters()" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-1/4">
+      <mat-label>Low Stock Threshold</mat-label>
+      <input
+        matInput
+        [(ngModel)]="filters.lowStockThreshold"
+        type="number"
+        placeholder="Enter threshold"
+        (input)="applyFilters()"
+      />
+    </mat-form-field>
+  </div>
+  <div class="overflow-x-auto">
+    <table
+      mat-table
+      [dataSource]="filteredProducts"
+      class="mat-elevation-z8 w-full min-w-max"
+    >
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="px-4 py-2 text-left">
+          Name
+        </th>
+        <td mat-cell *matCellDef="let product" class="px-4 py-2">
+          {{ product.name }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef class="px-4 py-2 text-left">
+          Quantity
+        </th>
+        <td mat-cell *matCellDef="let product" class="px-4 py-2">
+          {{ product.quantity }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="px-4 py-2 text-left">
+          Actions
+        </th>
+        <td mat-cell *matCellDef="let product" class="px-4 py-2">
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="openStockModal(product)"
+            aria-label="Update Stock"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['name', 'quantity', 'actions']"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['name', 'quantity', 'actions']"
+      ></tr>
+    </table>
+  </div>
+</div>
