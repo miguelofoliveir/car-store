@@ -15,13 +15,11 @@ describe('LoginComponent', () => {
   let routerMock: any;
 
   beforeEach(() => {
-    // Mock do AuthService
     authServiceMock = {
       login: jasmine.createSpy('login').and.returnValue(false), 
       getRole: jasmine.createSpy('getRole')
     };
 
-    // Mock do Router
     routerMock = {
       navigate: jasmine.createSpy('navigate')
     };
@@ -59,18 +57,18 @@ describe('LoginComponent', () => {
   });
 
   it('should call AuthService login with valid credentials', () => {
-    component.email = 'admin@test.com';
-    component.password = '1234';
-    authServiceMock.login.and.returnValue(true); // Simula login bem-sucedido
+    component.email = 'admin@example.com';
+    component.password = 'admin123';
+    authServiceMock.login.and.returnValue(true); 
 
     component.onSubmit();
 
-    expect(authServiceMock.login).toHaveBeenCalledWith('admin@test.com', '1234');
+    expect(authServiceMock.login).toHaveBeenCalledWith('admin@example.com', 'admin123');
     expect(routerMock.navigate).toHaveBeenCalledWith(['/dashboard']);
   });
 
   it('should set error message with invalid credentials', () => {
-    component.email = 'admin@test.com';
+    component.email = 'admin@example.com';
     component.password = 'wrongpassword';
     authServiceMock.login.and.returnValue(false); 
 

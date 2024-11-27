@@ -40,7 +40,7 @@ describe('FormComponent', () => {
     mockOrdersService.getProducts.and.returnValue(of(mockProducts));
     mockOrdersService.getClients.and.returnValue(of(mockClients));
 
-    fixture.detectChanges(); // Trigger ngOnInit
+    fixture.detectChanges();
 
     expect(component.products).toEqual(mockProducts);
     expect(component.clients).toEqual(mockClients);

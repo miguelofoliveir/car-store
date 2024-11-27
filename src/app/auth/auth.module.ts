@@ -1,23 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
+  declarations: [LoginComponent, AccessDeniedComponent],
   imports: [
     CommonModule,
-    FormsModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forChild([
+      { path: '', component: LoginComponent },
+      { path: 'access-denied', component: AccessDeniedComponent },
+    ]),
+    MatInputModule,
     MatButtonModule,
-    AuthRoutingModule
-  ]
+    MatCardModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

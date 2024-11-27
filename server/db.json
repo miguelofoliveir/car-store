@@ -44,7 +44,7 @@
   "orders": [
     {
       "id": "1",
-      "client": "Hamilton",
+      "client": "Cliente 1",
       "products": [
         {
           "id": "001d",
@@ -116,7 +116,7 @@
     },
     {
       "id": "acb9",
-      "client": "Hamilton",
+      "client": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -134,7 +134,7 @@
     },
     {
       "id": "e5ad",
-      "client": "Hamilton",
+      "client": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -152,7 +152,7 @@
     },
     {
       "id": "ba1e",
-      "client": "Hamilton",
+      "client": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -170,7 +170,7 @@
     },
     {
       "id": "c898",
-      "client": "Hamilton",
+      "client": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -206,7 +206,7 @@
     },
     {
       "id": "fdb9",
-      "client": "Hamilton",
+      "client": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -243,24 +243,55 @@
   ],
   "clients": [
     {
-      "name": "Hamilton",
-      "email": "hamilton@example.com",
-      "phone": "123-456-7890",
-      "address": "New York",
-      "id": "101"
+      "id": "9211",
+      "name": "Cliente 1",
+      "email": "cliente1@teste.com",
+      "phone": "11323242323",
+      "address": "Street 01"
     },
     {
-      "id": "102",
-      "name": "Miguel test",
-      "email": "miguel@example.com",
-      "phone": "987-654-3210"
+      "id": "540a",
+      "name": "Cliente 2",
+      "email": "cliente2@teste.com",
+      "phone": "11989283232",
+      "address": "Street 02"
     },
     {
-      "name": "Cintia",
-      "email": "cintia02@gmail.com",
-      "phone": "98989898989",
-      "address": "Street 02",
-      "id": "d01b"
+      "id": "3407",
+      "name": "Cliente 3",
+      "email": "cliente3@teste.com",
+      "phone": "11982923823",
+      "address": "Street 03"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "role": "admin",
+      "password": "admin123"
+    },
+    {
+      "id": "2",
+      "name": "Seller User",
+      "email": "seller@example.com",
+      "role": "seller",
+      "password": "seller123"
+    },
+    {
+      "name": "Jordan P.",
+      "email": "jordan@test.com",
+      "role": "client",
+      "password": "Belle@12",
+      "id": "c26e"
+    },
+    {
+      "id": "70d4",
+      "name": "Cliente 1",
+      "email": "cliente1@teste.com",
+      "role": "client",
+      "password": "Belle@12"
     }
   ]
 }

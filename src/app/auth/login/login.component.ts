@@ -5,21 +5,36 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  error: string | null = null;
+  email = '';
+  password = '';
+  error = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    if (this.authService.login(this.email, this.password)) {
-      const role = this.authService.getRole();
-      this.router.navigate([role === 'admin' ? '/dashboard' : '/']);
-    } else {
-      this.error = 'Credenciais inválidas';
+    this.error = '';
+
+    if (!this.email || !this.password) {
+      this.error = 'Email and password are required.';
+      return;
     }
+
+    this.authService.login(this.email, this.password).subscribe({
+      next: (isAuthenticated) => {
+        if (isAuthenticated) {
+          const role = this.authService.getRole();
+          this.authService.navigateToRole(role);
+        } else {
+          this.error = 'Invalid email or password.';
+        }
+      },
+      error: (err) => {
+        console.error('Error during login:', err);
+        this.error = 'Invalid email or password.';
+      },
+    });
   }
 }

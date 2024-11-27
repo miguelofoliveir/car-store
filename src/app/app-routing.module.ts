@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './auth/auth.guard';
 import { LoggedInLayoutComponent } from './layouts/logged-in-layout/logged-in-layout.component';
+import { AccessDeniedComponent } from './auth/access-denied/access-denied.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,12 +18,8 @@ const routes: Routes = [
         (m) => m.LoggedInLayoutModule
       ),
   },
-  {
-    path: 'products',
-    loadChildren: () =>
-      import('./products/products.module').then((m) => m.ProductsModule),
-  },
-  { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
+  { path: 'access-denied', component: AccessDeniedComponent },
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({

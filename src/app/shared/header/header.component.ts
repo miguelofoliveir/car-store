@@ -15,13 +15,13 @@ export class HeaderComponent {
     {
       label: 'Dashboard',
       link: '/dashboard',
-      roles: ['admin', 'seller', 'client'],
+      roles: ['admin'],
     },
     { label: 'Produts', link: '/products', roles: ['admin', 'seller'] },
     { label: 'Orders', link: '/orders', roles: ['admin', 'seller', 'client'] },
     { label: 'Clients', link: '/client', roles: ['admin', 'seller'] },
-    { label: 'Stock', link: '/stock', roles: ['admin', 'seller'] },
-    { label: 'Users', link: '/users', roles: ['admin'] },
+    { label: 'Stock', link: '/stock', roles: ['admin'] },
+    { label: 'Users', link: '/user-role', roles: ['admin'] },
   ];
 
   constructor(private router: Router, private authService: AuthService) {
