@@ -1,59 +1,55 @@
-<div class="dashboard-container flex w-full gap-6">
-  <div class="statistics flex w-full gap-4">
-    <mat-card class="stat-card text-center font-semibold text-lg p-4">
-      Produtos: {{ totalProducts }}
-    </mat-card>
-    <mat-card class="stat-card text-center font-semibold text-lg p-4">
-      Pedidos: {{ totalOrders }}
-    </mat-card>
-    <mat-card class="stat-card text-center font-semibold text-lg p-4">
-      Clientes: {{ totalClients }}
-    </mat-card>
-  </div>
-  <div class="charts w-full flex gap-6">
-    <div class="w-1/3">
-      <mat-card class="chart-card p-4">
-        <h3 class="text-lg font-semibold mb-4">Status de Pedidos</h3>
-        <ngx-charts-bar-vertical
-          [results]="orderStatusData"
-          [scheme]="'vivid'"
-        ></ngx-charts-bar-vertical>
-      </mat-card>
-    </div>
-    <div class="w-1/3">
-      <mat-card class="chart-card p-4">
-        <h3 class="text-lg font-semibold mb-4">Estoque Baixo</h3>
-        <ngx-charts-bar-horizontal
-          [results]="lowStockData"
-          [scheme]="'air'"
-        ></ngx-charts-bar-horizontal>
-      </mat-card>
-    </div>
-  </div>
-  <div class="quick-links flex flex-wrap gap-4 justify-center">
-    <button
-      mat-raised-button
-      color="primary"
-      routerLink="/products"
-      class="px-6 py-3 text-white font-semibold"
+<div class="dashboard-container lg:flex">
+  <section class="lg:flex w-full gap-4 lg:pl-4">
+    <mat-card
+      class="lg:w-1/3 text-center font-semibold text-lg p-4 lg:mb-0 mb-2"
     >
-      Produtos
-    </button>
-    <button
-      mat-raised-button
-      color="accent"
-      routerLink="/orders"
-      class="px-6 py-3 text-white font-semibold"
+      <p id="total-products" aria-label="Total Products">
+        Produtos: {{ totalProducts }}
+      </p>
+    </mat-card>
+    <mat-card
+      class="lg:w-1/3 text-center font-semibold text-lg p-4 lg:mb-0 mb-2"
     >
-      Pedidos
-    </button>
-    <button
-      mat-raised-button
-      color="warn"
-      routerLink="/clients"
-      class="px-6 py-3 text-white font-semibold"
+      <p id="total-orders" aria-label="Total Orders">
+        Pedidos: {{ totalOrders }}
+      </p>
+    </mat-card>
+    <mat-card
+      class="lg:w-1/3 text-center font-semibold text-lg p-4 lg:mb-0 mb-2"
     >
-      Clientes
-    </button>
-  </div>
+      <p id="total-clients" aria-label="Total Clients">
+        Clientes: {{ totalClients }}
+      </p>
+    </mat-card>
+  </section>
+  <section class="lg:charts lg:flex block lg:gap-6 lg:p-4">
+    <mat-card
+      class="chart-card lg:w-1/2 w-full lg:max-h-full lg:h-1/4 h-auto p-4 lg:mb-0 mb-4"
+    >
+      <h3 class="text-lg font-semibold mb-4" id="order-status-chart">
+        Status de Pedidos
+      </h3>
+      <ngx-charts-bar-vertical
+        [results]="orderStatusData"
+        [scheme]="'vivid'"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        aria-labelledby="order-status-chart"
+      ></ngx-charts-bar-vertical>
+    </mat-card>
+    <mat-card class="chart-card lg:w-1/2 lg:max-h-full lg:h-1/4 p-4">
+      <h3 class="text-lg font-semibold mb-4" id="low-stock-chart">
+        Estoque Baixo
+      </h3>
+      <ngx-charts-bar-vertical
+        [results]="lowStockData"
+        [scheme]="'air'"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        aria-labelledby="low-stock-chart"
+      ></ngx-charts-bar-vertical>
+    </mat-card>
+  </section>
 </div>
