@@ -1,40 +1,43 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private user: any = null;
+  private apiUrl = 'http://localhost:3000/users';
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private router: Router) {}
+  login(email: string, password: string): Observable<boolean> {
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map((users) => {
+        const user = users.find(
+          (u) => u.email === email && u.password === password
+        );
 
-  login(email: string, password: string): boolean {
-    const mockUsers = [
-      { email: 'admin@test.com', password: '1234', role: 'admin' },
-      { email: 'seller@test.com', password: '1234', role: 'seller' },
-      { email: 'client@test.com', password: '1234', role: 'client' },
-    ];
-
-    const user = mockUsers.find((u) => u.email === email && u.password === password);
-
-    if (user) {
-      this.user = user;
-      localStorage.setItem('user', JSON.stringify(user));
-      return true;
-    }
-
-    return false;
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          return true;
+        }
+        return false;
+      }),
+      catchError((error) => {
+        console.error('Login error:', error);
+        return of(false);
+      })
+    );
   }
 
   logout(): void {
-    this.user = null;
     localStorage.removeItem('user');
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/login']);
   }
 
   getUser(): any {
-    return this.user || JSON.parse(localStorage.getItem('user') || 'null');
+    return JSON.parse(localStorage.getItem('user') || 'null');
   }
 
   isAuthenticated(): boolean {
@@ -43,6 +46,31 @@ export class AuthService {
 
   getRole(): string | null {
     const user = this.getUser();
-    return user ? user.role : null;
+    console.log('User role:', user ? user.role : null);
+    return user?.role || null;
+  }
+
+  hasRole(requiredRoles: string[]): boolean {
+    const role = this.getRole();
+    return requiredRoles.includes(role || '');
+  }
+
+  navigateToRole(role: string | null): void {
+    console.log('Navigating to role:', role);
+    const roleRoutes: { [key: string]: string } = {
+      admin: '/dashboard',
+      seller: '/products',
+      client: '/orders',
+    };
+
+    if (role && roleRoutes[role.toLowerCase()]) {
+      console.log(`Navigating to: ${roleRoutes[role.toLowerCase()]}`);
+      this.router
+        .navigate([roleRoutes[role.toLowerCase()]])
+        .catch((err) => console.error('Navigation error:', err));
+    } else {
+      console.error(`No route defined for this role: ${role}`);
+      this.router.navigate(['/access-denied']);
+    }
   }
 }

@@ -18,7 +18,7 @@
         <mat-icon>arrow_back</mat-icon>
         Back to Orders
       </button>
-      <div class="flex gap-4">
+      <div *ngIf="role !== 'client'" class="flex gap-4">
         <button
           *ngIf="order.status !== 'Completed'"
           mat-raised-button

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from '../orders.service';
 import { Order } from '../order.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-details',
@@ -15,14 +16,20 @@ export class DetailsComponent implements OnInit {
     date: '',
     status: 'Pending',
   };
+  role: string | null = null;
+  currentClient: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
+    this.currentClient = this.authService.getUser()?.name || null;
+
     const orderId = this.route.snapshot.paramMap.get('id');
     if (orderId) {
       this.fetchOrder(orderId);
@@ -31,11 +38,21 @@ export class DetailsComponent implements OnInit {
 
   fetchOrder(orderId: string): void {
     this.ordersService.getOrderById(orderId).subscribe((data: Order) => {
+      if (this.role === 'client' && data.client !== this.currentClient) {
+        alert('Access denied: You can only view your own orders.');
+        this.router.navigate(['/orders']);
+        return;
+      }
       this.order = data;
     });
   }
 
   changeStatus(status: 'Pending' | 'Completed' | 'Canceled'): void {
+    if (this.role === 'client') {
+      alert('Access denied: Clients cannot change order status.');
+      return;
+    }
+
     if (this.order && this.order.id) {
       if (status === 'Completed') {
         let insufficientStock = false;

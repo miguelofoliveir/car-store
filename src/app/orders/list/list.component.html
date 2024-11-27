@@ -1,6 +1,8 @@
 <div class="p-4 bg-gray-100">
   <h2 class="text-2xl font-bold mb-4">Orders</h2>
-  <div class="flex flex-wrap gap-4 mb-4">
+
+  <!-- Filtros -->
+  <div *ngIf="role !== 'client'" class="flex flex-wrap gap-4 mb-4">
     <mat-form-field appearance="fill" class="w-1/4">
       <mat-label>Client</mat-label>
       <input matInput [(ngModel)]="filters.client" (input)="applyFilters()" />
@@ -27,11 +29,15 @@
       />
     </mat-form-field>
   </div>
-  <div class="mb-4">
+
+  <!-- Botão de Criar Pedido -->
+  <div *ngIf="role !== 'client'" class="mb-4">
     <button mat-raised-button color="primary" routerLink="/orders/create">
       Create Order
     </button>
   </div>
+
+  <!-- Tabela -->
   <div class="overflow-x-auto">
     <table
       mat-table
