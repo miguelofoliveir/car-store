@@ -15,6 +15,15 @@ export class ListComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   categories: string[] = [];
+  displayedColumns: string[] = [
+    'name',
+    'brand',
+    'price',
+    'description',
+    'category',
+    'image',
+    'actions',
+  ];
   filters = {
     name: '',
     brand: '',
@@ -24,8 +33,7 @@ export class ListComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private router: Router,
-    private dialog: MatDialog,
-    private injector: Injector
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -79,8 +87,8 @@ export class ListComponent implements OnInit {
   onViewDetails(product: Product): void {
     this.dialog.open(ModalComponent, {
       data: {
-        component: DetailsComponent, 
-        inputs: { product }, 
+        component: DetailsComponent,
+        inputs: { product },
       },
     });
   }

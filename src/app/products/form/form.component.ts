@@ -12,7 +12,7 @@ import { Product } from '../product.model';
 export class FormComponent implements OnInit {
   productForm!: FormGroup;
   isEditMode = false;
-  productId: number | null = null;
+  productId: string | null = null;
   imagePreview: string | ArrayBuffer | null = null;
 
   constructor(
@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
       imageFile: [null],
     });
 
-    this.productId = Number(this.route.snapshot.paramMap.get('id'));
+    this.productId = (this.route.snapshot.paramMap.get('id'));
     if (this.productId) {
       this.isEditMode = true;
       this.productsService

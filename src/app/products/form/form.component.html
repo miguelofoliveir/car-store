@@ -1,31 +1,58 @@
-<div class="p-4 bg-gray-100">
-  <h2 class="text-2xl font-bold mb-4">
+<section class="p-4 bg-gray-100" aria-labelledby="form-heading">
+  <h2 id="form-heading" class="text-2xl font-bold mb-4">
     {{ isEditMode ? "Edit Product" : "Add Product" }}
   </h2>
+
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
     <mat-form-field class="w-full" appearance="fill">
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" placeholder="Enter product name" />
-      <mat-error *ngIf="productForm.get('name')?.hasError('required')">
+      <mat-label for="product-name">Name</mat-label>
+      <input
+        id="product-name"
+        matInput
+        formControlName="name"
+        placeholder="Enter product name"
+        aria-required="true"
+        aria-describedby="name-error"
+      />
+      <mat-error
+        *ngIf="productForm.get('name')?.hasError('required')"
+        id="name-error"
+      >
         Name is required
       </mat-error>
     </mat-form-field>
     <mat-form-field class="w-full" appearance="fill">
-      <mat-label>Brand</mat-label>
-      <input matInput formControlName="brand" placeholder="Enter brand name" />
-      <mat-error *ngIf="productForm.get('brand')?.hasError('required')">
+      <mat-label for="product-brand">Brand</mat-label>
+      <input
+        id="product-brand"
+        matInput
+        formControlName="brand"
+        placeholder="Enter brand name"
+        aria-required="true"
+        aria-describedby="brand-error"
+      />
+      <mat-error
+        *ngIf="productForm.get('brand')?.hasError('required')"
+        id="brand-error"
+      >
         Brand is required
       </mat-error>
     </mat-form-field>
     <mat-form-field class="w-full" appearance="fill">
-      <mat-label>Price</mat-label>
+      <mat-label for="product-price">Price</mat-label>
       <input
+        id="product-price"
         matInput
         formControlName="price"
         type="number"
         placeholder="Enter product price"
+        aria-required="true"
+        aria-describedby="price-error"
       />
-      <mat-error *ngIf="productForm.get('price')?.hasError('required')">
+      <mat-error
+        *ngIf="productForm.get('price')?.hasError('required')"
+        id="price-error"
+      >
         Price is required
       </mat-error>
       <mat-error *ngIf="productForm.get('price')?.hasError('min')">
@@ -33,8 +60,9 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="w-full" appearance="fill">
-      <mat-label>Description</mat-label>
+      <mat-label for="product-description">Description</mat-label>
       <textarea
+        id="product-description"
         matInput
         formControlName="description"
         placeholder="Enter product description"
@@ -42,22 +70,39 @@
       ></textarea>
     </mat-form-field>
     <mat-form-field class="w-full" appearance="fill">
-      <mat-label>Category</mat-label>
+      <mat-label for="product-category">Category</mat-label>
       <input
+        id="product-category"
         matInput
         formControlName="category"
         placeholder="Enter product category"
+        aria-required="true"
+        aria-describedby="category-error"
       />
-      <mat-error *ngIf="productForm.get('category')?.hasError('required')">
+      <mat-error
+        *ngIf="productForm.get('category')?.hasError('required')"
+        id="category-error"
+      >
         Category is required
       </mat-error>
     </mat-form-field>
     <mat-form-field class="w-full" appearance="fill">
-      <mat-label>Image URL</mat-label>
-      <input matInput formControlName="image" placeholder="Enter image URL" />
+      <mat-label for="product-image">Image URL</mat-label>
+      <input
+        id="product-image"
+        matInput
+        formControlName="image"
+        placeholder="Enter image URL"
+      />
     </mat-form-field>
     <div class="flex justify-end gap-4">
-      <button mat-button type="button" color="warn" (click)="onCancel()">
+      <button
+        mat-button
+        type="button"
+        color="warn"
+        (click)="onCancel()"
+        aria-label="Cancel"
+      >
         Cancel
       </button>
       <button
@@ -65,9 +110,10 @@
         color="primary"
         type="submit"
         [disabled]="productForm.invalid"
+        aria-label="Save Product"
       >
         Save
       </button>
     </div>
   </form>
-</div>
+</section>
