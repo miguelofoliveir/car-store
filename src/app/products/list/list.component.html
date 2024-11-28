@@ -4,12 +4,22 @@
   <div class="flex flex-wrap gap-4 mb-4">
     <mat-form-field appearance="fill" class="w-1/4">
       <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="filters.name" (input)="applyFilters()" />
+      <input
+        matInput
+        [(ngModel)]="filters.name"
+        (input)="applyFilters()"
+        aria-label="Filter by name"
+      />
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-1/4">
       <mat-label>Brand</mat-label>
-      <input matInput [(ngModel)]="filters.brand" (input)="applyFilters()" />
+      <input
+        matInput
+        [(ngModel)]="filters.brand"
+        (input)="applyFilters()"
+        aria-label="Filter by brand"
+      />
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-1/4">
@@ -17,6 +27,7 @@
       <mat-select
         [(ngModel)]="filters.category"
         (selectionChange)="applyFilters()"
+        aria-label="Filter by category"
       >
         <mat-option *ngFor="let category of categories" [value]="category">{{
           category
@@ -27,7 +38,7 @@
   </div>
 
   <div class="flex justify-end mb-4">
-    <button mat-raised-button color="primary" (click)="onAdd()">
+    <button mat-raised-button color="primary" (click)="onAdd()" aria-label="Add a new product">
       Add Product
     </button>
   </div>
@@ -85,7 +96,7 @@
           <img
             *ngIf="product.image"
             [src]="product.image"
-            alt="Product Image"
+            alt="Image of {{ product.name }}"
             class="h-10 w-10 object-cover"
           />
         </td>
@@ -122,33 +133,8 @@
         </td>
       </ng-container>
 
-      <tr
-        mat-header-row
-        *matHeaderRowDef="[
-          'name',
-          'brand',
-          'price',
-          'description',
-          'category',
-          'image',
-          'actions'
-        ]"
-      ></tr>
-      <tr
-        mat-row
-        *matRowDef="
-          let row;
-          columns: [
-            'name',
-            'brand',
-            'price',
-            'description',
-            'category',
-            'image',
-            'actions'
-          ]
-        "
-      ></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
 </div>

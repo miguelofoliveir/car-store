@@ -1,7 +1,7 @@
 <div *ngIf="order" class="p-4 bg-gray-100 container mx-auto">
   <h2 class="text-2xl font-bold mb-4">Order Details</h2>
   <div class="space-y-4 bg-white p-4 shadow rounded">
-    <div><strong>Client:</strong> {{ order.client }}</div>
+    <div><strong>Client:</strong> {{ order.clientId }}</div>
     <div><strong>Date:</strong> {{ order.date | date }}</div>
     <div><strong>Status:</strong> {{ order.status }}</div>
     <div>

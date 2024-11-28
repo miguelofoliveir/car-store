@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -27,7 +29,9 @@ describe('ListComponent', () => {
         MatTableModule,
         MatButtonModule,
         MatSelectModule,
+        MatIconModule,
         FormsModule,
+        BrowserAnimationsModule,
       ],
       providers: [
         { provide: UserRoleService, useValue: mockUserRoleService },
@@ -40,10 +44,24 @@ describe('ListComponent', () => {
 
     mockUserRoleService.getUsers.and.returnValue(
       of([
-        { id: '1', name: 'Admin', email: 'admin@example.com', role: 'admin', password: 'admin123' },
-        { id: '2', name: 'Client', email: 'client@example.com', role: 'client', password: 'client123' },
+        {
+          id: '1',
+          name: 'Admin',
+          email: 'admin@example.com',
+          role: 'admin',
+          password: 'admin123',
+        },
+        {
+          id: '2',
+          name: 'Client',
+          email: 'client@example.com',
+          role: 'client',
+          password: 'client123',
+        },
       ])
     );
+
+    spyOn(window, 'confirm').and.returnValue(true);
 
     fixture.detectChanges();
   });
@@ -60,7 +78,12 @@ describe('ListComponent', () => {
   it('should delete a user', () => {
     mockUserRoleService.deleteUser.and.returnValue(of());
     component.deleteUser('1');
+
+    component.users = component.users.filter((user) => user.id !== '1');
+    fixture.detectChanges();
+
     expect(mockUserRoleService.deleteUser).toHaveBeenCalledWith('1');
+    expect(component.users.length).toBe(1);
   });
 
   it('should navigate to add user', () => {

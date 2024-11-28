@@ -59,7 +59,7 @@ export class FormComponent implements OnInit {
 
       if (selectedClient && selectedProduct) {
         const newOrder: Order = {
-          client: selectedClient.name,
+          clientId: selectedClient.name,
           products: [
             {
               ...selectedProduct,

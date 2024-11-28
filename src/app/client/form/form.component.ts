@@ -20,6 +20,7 @@ export class FormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.clientForm = this.fb.group({
+      id: [''],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],

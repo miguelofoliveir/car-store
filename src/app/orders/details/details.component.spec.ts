@@ -5,13 +5,23 @@ import { DetailsComponent } from './details.component';
 import { of } from 'rxjs';
 import { Order } from '../order.model';
 import { Product } from '../../products/product.model';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
   let fixture: ComponentFixture<DetailsComponent>;
   let mockOrdersService: jasmine.SpyObj<OrdersService>;
-  let mockActivatedRoute: ActivatedRoute;
   let mockRouter: jasmine.SpyObj<Router>;
+
+  const mockActivatedRoute = {
+    snapshot: {
+      paramMap: {
+        get: (key: string) => (key === 'id' ? '123' : null),
+      },
+    },
+  } as ActivatedRoute;
 
   beforeEach(async () => {
     mockOrdersService = jasmine.createSpyObj('OrdersService', [
@@ -23,19 +33,13 @@ describe('DetailsComponent', () => {
 
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
 
-    mockActivatedRoute = {
-      snapshot: {
-        paramMap: {
-          get: (key: string) => (key === 'id' ? '123' : null),
-          has: (key: string) => key === 'id',
-          getAll: (key: string) => (key === 'id' ? ['123'] : []),
-          keys: ['id'],
-        } as any,
-      },
-    } as ActivatedRoute;
-
     await TestBed.configureTestingModule({
       declarations: [DetailsComponent],
+      imports: [
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+      ],
       providers: [
         { provide: OrdersService, useValue: mockOrdersService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
@@ -50,7 +54,7 @@ describe('DetailsComponent', () => {
   it('should fetch order on init', () => {
     const mockOrder: Order = {
       id: '123',
-      client: 'John Doe',
+      clientId: 'John Doe',
       products: [
         {
           id: '1',
@@ -78,7 +82,7 @@ describe('DetailsComponent', () => {
   it('should update order status to Completed and reduce stock', () => {
     const mockOrder: Order = {
       id: '123',
-      client: 'John Doe',
+      clientId: 'John Doe',
       products: [
         {
           id: '1',
@@ -110,10 +114,7 @@ describe('DetailsComponent', () => {
     mockOrdersService.getProductById.and.returnValue(of(mockProduct));
     mockOrdersService.updateProductStock.and.returnValue(of(void 0));
     mockOrdersService.updateOrderStatus.and.returnValue(
-      of({
-        ...mockOrder,
-        status: 'Completed',
-      })
+      of({ ...mockOrder, status: 'Completed' })
     );
 
     fixture.detectChanges();

@@ -33,7 +33,7 @@ describe('StockService', () => {
     it('should fetch a list of products', () => {
       const mockProducts: Product[] = [
         {
-          id: 1,
+          id: '1',
           name: 'Product 1',
           quantity: 10,
           price: 100,
@@ -43,7 +43,7 @@ describe('StockService', () => {
           image: '',
         },
         {
-          id: 2,
+          id: '2',
           name: 'Product 2',
           quantity: 5,
           price: 200,
@@ -67,7 +67,7 @@ describe('StockService', () => {
 
   describe('#updateProductQuantity', () => {
     it('should update the quantity of a product', () => {
-      const productId = 1;
+      const productId = '1';
       const updatedQuantity = 20;
       const updatedProduct: Product = {
         id: productId,

@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
     this.ordersService.getOrders().subscribe((data: Order[]) => {
       if (this.role === 'client') {
         const clientName = this.authService.getUser()?.name;
-        this.orders = data.filter((order) => order.client === clientName);
+        this.orders = data.filter((order) => order.clientId === clientName);
       } else {
         this.orders = data;
       }

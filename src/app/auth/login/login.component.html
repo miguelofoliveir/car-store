@@ -1,25 +1,71 @@
 <div class="flex justify-center items-center h-screen">
-  <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
-    <h2 class="text-2xl font-bold text-center mb-4">Login</h2>
-    
-    <div *ngIf="error" class="text-red-500 mb-4">
-      {{ error }}
+  <div class="w-full max-w-md shadow-lg rounded-lg">
+    <div class="bg-gray-700 flex justify-center w-full rounded-t-lg p-6">
+      <picture>
+        <source
+          type="image/webp"
+          srcset="
+            https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid.png.webp          1600w,
+            https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid-300x45.png.webp    300w,
+            https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid-1024x154.png.webp 1024w,
+            https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid-768x115.png.webp   768w,
+            https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid-1536x230.png.webp 1536w
+          "
+          sizes="(max-width: 1600px) 100vw, 1600px"
+        />
+        <img
+          class="w-full max-h-8 object-contain"
+          fetchpriority="high"
+          src="https://www.amxhealthcare.com/wp-content/uploads/2022/04/Logo-Hybrid.png"
+          alt="AMX Healthcare Logo"
+        />
+      </picture>
     </div>
+    <div class="p-8">
+      <h2 class="text-2xl font-bold text-center my-4">Login</h2>
 
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-      <mat-form-field appearance="fill" class="w-full mb-4">
-        <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="email" name="email" required />
-      </mat-form-field>
+      <div *ngIf="error" class="text-red-500 mb-4" aria-live="polite">
+        {{ error }}
+      </div>
 
-      <mat-form-field appearance="fill" class="w-full mb-4">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" [(ngModel)]="password" name="password" required />
-      </mat-form-field>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <mat-form-field appearance="fill" class="w-full mb-4">
+          <label for="email-input" class="sr-only">Email</label>
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            [(ngModel)]="email"
+            name="email"
+            aria-label="Enter your email"
+            aria-describedby="email-description"
+            required
+          />
+          <span id="email-description" class="sr-only"
+            >Required field for email</span
+          >
+        </mat-form-field>
 
-      <button mat-raised-button color="primary" class="w-full" type="submit">
-        Login
-      </button>
-    </form>
+        <mat-form-field appearance="fill" class="w-full mb-4">
+          <label for="email-input" class="sr-only">Password</label>
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            aria-label="Enter your password"
+            aria-describedby="password-description"
+            required
+          />
+          <span id="password-description" class="sr-only"
+            >Required field for password</span
+          >
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="w-full" type="submit">
+          Login
+        </button>
+      </form>
+    </div>
   </div>
 </div>

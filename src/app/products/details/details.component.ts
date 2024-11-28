@@ -1,4 +1,6 @@
 import { Component, Inject } from '@angular/core';
+import { Product } from '../product.model';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-details',
@@ -6,5 +8,5 @@ import { Component, Inject } from '@angular/core';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent {
-  constructor(@Inject('product') public product: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public product: Product) {}
 }

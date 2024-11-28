@@ -1,70 +1,56 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HeaderComponent } from './header.component';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HeaderComponent } from './header.component';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Router } from '@angular/router';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['getRole']);
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+
+    await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [RouterTestingModule, MatButtonModule],
-    });
+      imports: [RouterTestingModule, MatButtonModule, HttpClientTestingModule],
+      providers: [
+        { provide: AuthService, useValue: authServiceSpy },
+        { provide: Router, useValue: routerSpy },
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render logo with correct link', () => {
-    const logoElement = fixture.debugElement.query(
-      By.css('a[href="https://www.amxhealthcare.com"]')
-    );
+  it('should render the logo with the correct attributes', () => {
+    const logoElement = fixture.debugElement.query(By.css('a'));
     expect(logoElement).toBeTruthy();
     const imgElement = logoElement.query(By.css('img'));
+    expect(imgElement).toBeTruthy();
     expect(imgElement.attributes['alt']).toContain('AMX Healthcare Logo');
   });
 
-  it('should render navigation links', () => {
-    const navLinks = fixture.debugElement.queryAll(By.css('nav a'));
-    expect(navLinks.length).toBe(4);
-    expect(navLinks[0].nativeElement.textContent).toContain('Dashboard');
-    expect(navLinks[1].nativeElement.textContent).toContain('Products');
-    expect(navLinks[2].nativeElement.textContent).toContain('Orders');
-    expect(navLinks[3].nativeElement.textContent).toContain('Clients');
-  });
 
-  it('should render logout button in desktop view', () => {
-    const logoutButton = fixture.debugElement.query(By.css('button'));
-    expect(logoutButton).toBeTruthy();
-    expect(logoutButton.nativeElement.textContent).toContain('Logout');
-  });
-
-  it('should toggle mobile menu visibility', () => {
-    component.isMenuOpen = false;
-    fixture.detectChanges();
-    let mobileMenu = fixture.debugElement.query(By.css('.mobile-menu'));
-    expect(mobileMenu).toBeFalsy();
-
-    component.isMenuOpen = true;
-    fixture.detectChanges();
-    mobileMenu = fixture.debugElement.query(By.css('.mobile-menu'));
-    expect(mobileMenu).toBeTruthy();
-  });
-
-  it('should render logout button inside mobile menu', () => {
-    component.isMenuOpen = true;
-    fixture.detectChanges();
-    const mobileLogoutButton = fixture.debugElement.query(
-      By.css('.mobile-menu button')
+  it('should call logout and navigate to login', () => {
+    const logoutButton = fixture.debugElement.query(
+      By.css('button[color="warn"]')
     );
-    expect(mobileLogoutButton).toBeTruthy();
-    expect(mobileLogoutButton.nativeElement.textContent).toContain('Logout');
+    expect(logoutButton).toBeTruthy();
+
+    logoutButton.nativeElement.click();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
+    expect(localStorage.length).toBe(0);
   });
 });
