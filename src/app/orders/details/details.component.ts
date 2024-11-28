@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class DetailsComponent implements OnInit {
   order: Order = {
-    client: '',
+    clientId: '',
     products: [],
     date: '',
     status: 'Pending',
@@ -38,7 +38,7 @@ export class DetailsComponent implements OnInit {
 
   fetchOrder(orderId: string): void {
     this.ordersService.getOrderById(orderId).subscribe((data: Order) => {
-      if (this.role === 'client' && data.client !== this.currentClient) {
+      if (this.role === 'client' && data.clientId !== this.currentClient) {
         alert('Access denied: You can only view your own orders.');
         this.router.navigate(['/orders']);
         return;

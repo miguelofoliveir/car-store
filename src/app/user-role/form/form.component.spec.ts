@@ -4,6 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { FormComponent } from './form.component';
@@ -41,6 +42,7 @@ describe('FormComponent', () => {
         MatInputModule,
         MatButtonModule,
         MatSelectModule,
+        BrowserAnimationsModule,
       ],
       providers: [
         { provide: UserRoleService, useValue: mockUserRoleService },

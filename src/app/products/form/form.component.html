@@ -60,6 +60,24 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="w-full" appearance="fill">
+      <mat-label for="product-quantity">Quantity</mat-label>
+      <input
+        id="product-quantity"
+        matInput
+        formControlName="quantity"
+        type="number"
+        placeholder="Enter product quantity"
+        aria-required="true"
+        aria-describedby="quantity-error"
+      />
+      <mat-error
+        *ngIf="productForm.get('quantity')?.hasError('required')"
+        id="quantity-error"
+      >
+        Quantity is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
       <mat-label for="product-description">Description</mat-label>
       <textarea
         id="product-description"

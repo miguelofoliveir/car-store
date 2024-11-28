@@ -25,7 +25,7 @@ describe('OrdersService', () => {
 
   it('should create an order', () => {
     const mockOrder: Order = {
-      client: 'John Doe',
+      clientId: 'John Doe',
       products: [
         {
           id: '1',

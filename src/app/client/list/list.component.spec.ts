@@ -7,6 +7,8 @@ import { Client } from '../client.model';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -40,7 +42,13 @@ describe('ListComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ListComponent],
-      imports: [MatTableModule, MatInputModule, MatButtonModule],
+      imports: [
+        MatTableModule,
+        MatInputModule,
+        MatButtonModule,
+        FormsModule,
+        BrowserAnimationsModule,
+      ],
       providers: [
         { provide: ClientService, useValue: mockClientService },
         { provide: Router, useValue: mockRouter },
@@ -71,10 +79,27 @@ describe('ListComponent', () => {
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/client/edit', '1']);
   });
 
-  it('should delete a client and refresh the list', () => {
+  it('should delete a client and refresh the list if confirmed', () => {
+    spyOn(window, 'confirm').and.returnValue(true);
+
     mockClientService.deleteClient.and.returnValue(of(void 0));
     component.deleteClient('1');
+
+    expect(window.confirm).toHaveBeenCalledWith(
+      'Are you sure you want to delete this client?'
+    );
     expect(mockClientService.deleteClient).toHaveBeenCalledWith('1');
     expect(component.clients.length).toBe(1);
+  });
+
+  it('should not delete a client if not confirmed', () => {
+    spyOn(window, 'confirm').and.returnValue(false);
+
+    component.deleteClient('1');
+
+    expect(window.confirm).toHaveBeenCalledWith(
+      'Are you sure you want to delete this client?'
+    );
+    expect(mockClientService.deleteClient).not.toHaveBeenCalled();
   });
 });

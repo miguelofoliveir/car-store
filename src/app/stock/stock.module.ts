@@ -8,13 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { StockRoutingModule } from './stock-routing.module';
-import { StockComponent } from './stock.component';
 import { ListComponent } from './list/list.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StockModalComponent } from './stock-modal/stock-modal.component';
 
 @NgModule({
-  declarations: [StockComponent, ListComponent, StockModalComponent],
+  declarations: [ListComponent, StockModalComponent],
   imports: [
     CommonModule,
     StockRoutingModule,

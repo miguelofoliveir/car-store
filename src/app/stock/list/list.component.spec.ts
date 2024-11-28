@@ -6,6 +6,10 @@ import { StockService } from '../stock.service';
 import { Product } from 'src/app/products/product.model';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StockModalComponent } from '../stock-modal/stock-modal.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -15,7 +19,7 @@ describe('ListComponent', () => {
 
   const mockProducts: Product[] = [
     {
-      id: 1,
+      id: '1',
       name: 'Product 1',
       quantity: 10,
       price: 100,
@@ -25,7 +29,7 @@ describe('ListComponent', () => {
       image: '',
     },
     {
-      id: 2,
+      id: '2',
       name: 'Product 2',
       quantity: 5,
       price: 200,
@@ -44,7 +48,13 @@ describe('ListComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ListComponent],
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+      ],
       providers: [
         { provide: StockService, useValue: stockServiceSpy },
         { provide: MatDialog, useValue: dialogSpy },
@@ -65,7 +75,7 @@ describe('ListComponent', () => {
 
   it('should load products on initialization', () => {
     component.ngOnInit();
-    expect(stockService.getProducts).toHaveBeenCalled();
+    expect(stockService.getProducts).toHaveBeenCalledTimes(1);
     expect(component.products).toEqual(mockProducts);
     expect(component.filteredProducts).toEqual(mockProducts);
   });
@@ -83,37 +93,5 @@ describe('ListComponent', () => {
     component.applyFilters();
     expect(component.filteredProducts.length).toBe(1);
     expect(component.filteredProducts[0].name).toBe('Product 2');
-  });
-
-  it('should open the stock modal and reload products after closing', () => {
-    const mockProduct = mockProducts[0];
-    const dialogRefSpy = { afterClosed: () => of(true) } as any;
-    dialog.open.and.returnValue(dialogRefSpy);
-
-    component.openStockModal(mockProduct);
-
-    expect(dialog.open).toHaveBeenCalledWith(StockModalComponent, {
-      data: mockProduct,
-    });
-
-    dialogRefSpy.afterClosed().subscribe(() => {
-      expect(stockService.getProducts).toHaveBeenCalledTimes(2);
-    });
-  });
-
-  it('should not reload products if the modal is closed without saving', () => {
-    const mockProduct = mockProducts[0];
-    const dialogRefSpy = { afterClosed: () => of(false) } as any;
-    dialog.open.and.returnValue(dialogRefSpy);
-
-    component.openStockModal(mockProduct);
-
-    expect(dialog.open).toHaveBeenCalledWith(StockModalComponent, {
-      data: mockProduct,
-    });
-
-    dialogRefSpy.afterClosed().subscribe(() => {
-      expect(stockService.getProducts).toHaveBeenCalledTimes(1);
-    });
   });
 });

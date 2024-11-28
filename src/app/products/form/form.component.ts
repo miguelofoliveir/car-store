@@ -30,10 +30,10 @@ export class FormComponent implements OnInit {
       description: [''],
       category: ['', [Validators.required]],
       image: [''],
-      imageFile: [null],
+      quantity: ['', [Validators.required]],
     });
 
-    this.productId = (this.route.snapshot.paramMap.get('id'));
+    this.productId = this.route.snapshot.paramMap.get('id');
     if (this.productId) {
       this.isEditMode = true;
       this.productsService

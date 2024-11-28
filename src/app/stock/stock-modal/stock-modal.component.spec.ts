@@ -1,35 +1,45 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { of } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { StockModalComponent } from './stock-modal.component';
 import { StockService } from '../stock.service';
 import { Product } from 'src/app/products/product.model';
+import { of } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('StockModalComponent', () => {
   let component: StockModalComponent;
   let fixture: ComponentFixture<StockModalComponent>;
   let stockServiceSpy: jasmine.SpyObj<StockService>;
-  let dialogRefSpy: jasmine.SpyObj<MatDialogRef<StockModalComponent, boolean>>;
+  let dialogRefSpy: jasmine.SpyObj<MatDialogRef<StockModalComponent>>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     const stockServiceMock = jasmine.createSpyObj('StockService', [
       'updateProductQuantity',
     ]);
     const dialogRefMock = jasmine.createSpyObj('MatDialogRef', ['close']);
 
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [StockModalComponent],
-      imports: [ReactiveFormsModule],
+      imports: [
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+      ],
       providers: [
         { provide: StockService, useValue: stockServiceMock },
         { provide: MatDialogRef, useValue: dialogRefMock },
         {
           provide: MAT_DIALOG_DATA,
-          useValue: { id: 1, name: 'Test Product', quantity: 10 } as Product,
+          useValue: { id: '1', name: 'Test Product', quantity: 10 } as Product,
         },
       ],
-    });
+    }).compileComponents();
 
     fixture = TestBed.createComponent(StockModalComponent);
     component = fixture.componentInstance;
@@ -37,7 +47,7 @@ describe('StockModalComponent', () => {
       StockService
     ) as jasmine.SpyObj<StockService>;
     dialogRefSpy = TestBed.inject(MatDialogRef) as jasmine.SpyObj<
-      MatDialogRef<StockModalComponent, boolean>
+      MatDialogRef<StockModalComponent>
     >;
 
     fixture.detectChanges();
@@ -65,14 +75,14 @@ describe('StockModalComponent', () => {
 
   it('should call StockService.updateProductQuantity on valid form submission', () => {
     const mockProduct: Product = {
-      id: 1,
+      id: '1',
       name: 'Updated Product',
       quantity: 15,
       brand: 'Test Brand',
       price: 100,
       description: 'Test Description',
-      category: 'teste',
-      image: 'teste.png',
+      category: 'Test Category',
+      image: 'test.png',
     };
 
     stockServiceSpy.updateProductQuantity.and.returnValue(of(mockProduct));
@@ -80,7 +90,7 @@ describe('StockModalComponent', () => {
     component.stockForm.setValue({ quantity: 15 });
     component.onSave();
 
-    expect(stockServiceSpy.updateProductQuantity).toHaveBeenCalledWith(1, 15);
+    expect(stockServiceSpy.updateProductQuantity).toHaveBeenCalledWith('1', 15);
     expect(dialogRefSpy.close).toHaveBeenCalledWith(true);
   });
 

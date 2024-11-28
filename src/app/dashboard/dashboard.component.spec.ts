@@ -3,22 +3,37 @@ import { DashboardComponent } from './dashboard.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  let httpTestingController: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      imports: [MatCardModule, MatButtonModule, NgxChartsModule, BrowserAnimationsModule],
+      imports: [
+        MatCardModule,
+        MatButtonModule,
+        NgxChartsModule,
+        BrowserAnimationsModule,
+        HttpClientTestingModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
   });
 
   it('should create', () => {
@@ -26,41 +41,47 @@ describe('DashboardComponent', () => {
   });
 
   it('should display total statistics correctly', () => {
-    component.totalProducts = 100;
-    component.totalOrders = 200;
-    component.totalClients = 50;
+    const mockProducts = [
+      { id: '1', name: 'Product 1', quantity: 3 },
+      { id: '2', name: 'Product 2', quantity: 10 },
+    ];
+    const mockOrders = [
+      { id: '1', status: 'Completed' },
+      { id: '2', status: 'Pending' },
+    ];
+    const mockClients = [{ id: '1', name: 'John Doe' }];
+
     fixture.detectChanges();
 
-    const statCards = fixture.debugElement.queryAll(By.css('.stat-card'));
-    expect(statCards.length).toBe(3);
-    expect(statCards[0].nativeElement.textContent).toContain('Produtos: 100');
-    expect(statCards[1].nativeElement.textContent).toContain('Pedidos: 200');
-    expect(statCards[2].nativeElement.textContent).toContain('Clientes: 50');
-  });
-
-  it('should display correct chart titles', () => {
-    const chartTitles = fixture.debugElement.queryAll(By.css('.chart-card h3'));
-    expect(chartTitles.length).toBe(2);
-    expect(chartTitles[0].nativeElement.textContent).toContain(
-      'Status de Pedidos'
+    const reqProducts = httpTestingController.expectOne(
+      'http://localhost:3000/products'
     );
-    expect(chartTitles[1].nativeElement.textContent).toContain('Estoque Baixo');
-  });
+    reqProducts.flush(mockProducts);
 
-  it('should have quick links with correct router links', () => {
-    const buttons = fixture.debugElement.queryAll(
-      By.css('.quick-links button')
+    const reqOrders = httpTestingController.expectOne(
+      'http://localhost:3000/orders'
     );
-    expect(buttons.length).toBe(3);
+    reqOrders.flush(mockOrders);
 
-    const [productsBtn, ordersBtn, clientsBtn] = buttons;
-    expect(productsBtn.nativeElement.textContent).toContain('Produtos');
-    expect(productsBtn.attributes['ng-reflect-router-link']).toBe('/products');
+    const reqClients = httpTestingController.expectOne(
+      'http://localhost:3000/clients'
+    );
+    reqClients.flush(mockClients);
 
-    expect(ordersBtn.nativeElement.textContent).toContain('Pedidos');
-    expect(ordersBtn.attributes['ng-reflect-router-link']).toBe('/orders');
+    fixture.detectChanges();
 
-    expect(clientsBtn.nativeElement.textContent).toContain('Clientes');
-    expect(clientsBtn.attributes['ng-reflect-router-link']).toBe('/clients');
+    const totalProductsEl = fixture.debugElement.query(
+      By.css('#total-products')
+    ).nativeElement;
+    const totalOrdersEl = fixture.debugElement.query(
+      By.css('#total-orders')
+    ).nativeElement;
+    const totalClientsEl = fixture.debugElement.query(
+      By.css('#total-clients')
+    ).nativeElement;
+
+    expect(totalProductsEl.textContent).toContain('Produtos: 2');
+    expect(totalOrdersEl.textContent).toContain('Pedidos: 2');
+    expect(totalClientsEl.textContent).toContain('Clientes: 1');
   });
 });

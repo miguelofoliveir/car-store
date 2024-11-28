@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
-import { ProductsComponent } from './products.component';
 import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
 import { MatCardModule } from '@angular/material/card';
@@ -16,12 +15,7 @@ import { DetailsComponent } from './details/details.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
-  declarations: [
-    ProductsComponent,
-    ListComponent,
-    FormComponent,
-    DetailsComponent,
-  ],
+  declarations: [ListComponent, FormComponent, DetailsComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,

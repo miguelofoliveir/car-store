@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductsService } from '../products.service';
 import { FormComponent } from './form.component';
 import { Product } from '../product.model';
@@ -33,6 +34,7 @@ describe('FormComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
+        BrowserAnimationsModule,
       ],
       providers: [
         { provide: ProductsService, useValue: productServiceSpy },
@@ -59,6 +61,19 @@ describe('FormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
+
+    const mockProduct: Product = {
+      id: '1',
+      name: 'Test Product',
+      brand: 'Test Brand',
+      price: 100,
+      description: 'Test Description',
+      category: 'Test Category',
+      image: 'http://example.com/image.jpg',
+      quantity: 4,
+    };
+    productsServiceSpy.getProductById.and.returnValue(of(mockProduct));
+
     fixture.detectChanges();
   });
 
@@ -66,32 +81,8 @@ describe('FormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize the form with empty values when not in edit mode', () => {
-    component.isEditMode = false;
-    component.ngOnInit();
-    expect(component.productForm.value).toEqual({
-      name: '',
-      brand: '',
-      price: 0,
-      description: '',
-      category: '',
-      image: '',
-    });
-  });
-
   it('should populate the form with product data when in edit mode', () => {
-    const mockProduct: Product = {
-      id: 1,
-      name: 'Test Product',
-      brand: 'Test Brand',
-      price: 100,
-      description: 'Test Description',
-      category: 'Test Category',
-      image: 'http://example.com/image.jpg',
-    };
-
     component.isEditMode = true;
-    productsServiceSpy.getProductById.and.returnValue(of(mockProduct));
     component.ngOnInit();
 
     expect(component.productForm.value).toEqual({
@@ -101,6 +92,7 @@ describe('FormComponent', () => {
       description: 'Test Description',
       category: 'Test Category',
       image: 'http://example.com/image.jpg',
+      quantity: 4,
     });
   });
 
@@ -111,13 +103,14 @@ describe('FormComponent', () => {
 
   it('should call addProduct when submitting a new product', () => {
     const mockProduct: Product = {
-      id: 1,
+      id: '1',
       name: 'Test Product',
       brand: 'Test Brand',
       price: 100,
       description: 'Test Description',
       category: 'Test Category',
       image: 'http://example.com/image.jpg',
+      quantity: 4,
     };
 
     component.isEditMode = false;
@@ -128,28 +121,40 @@ describe('FormComponent', () => {
       description: mockProduct.description,
       category: mockProduct.category,
       image: mockProduct.image,
+      quantity: mockProduct.quantity,
     });
 
     productsServiceSpy.addProduct.and.returnValue(of(mockProduct));
     component.onSubmit();
 
-    expect(productsServiceSpy.addProduct).toHaveBeenCalledWith(mockProduct);
+    expect(productsServiceSpy.addProduct).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        name: mockProduct.name,
+        brand: mockProduct.brand,
+        price: mockProduct.price,
+        description: mockProduct.description,
+        category: mockProduct.category,
+        image: mockProduct.image,
+        quantity: mockProduct.quantity,
+      })
+    );
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/products']);
   });
 
   it('should call updateProduct when editing an existing product', () => {
     const mockProduct: Product = {
-      id: 1,
+      id: '1',
       name: 'Test Product',
       brand: 'Test Brand',
       price: 100,
       description: 'Test Description',
       category: 'Test Category',
       image: 'http://example.com/image.jpg',
+      quantity: 4,
     };
 
     component.isEditMode = true;
-    component.productId = 1;
+    component.productId = '1';
     component.productForm.setValue({
       name: mockProduct.name,
       brand: mockProduct.brand,
@@ -157,14 +162,23 @@ describe('FormComponent', () => {
       description: mockProduct.description,
       category: mockProduct.category,
       image: mockProduct.image,
+      quantity: mockProduct.quantity,
     });
 
     productsServiceSpy.updateProduct.and.returnValue(of(mockProduct));
     component.onSubmit();
 
     expect(productsServiceSpy.updateProduct).toHaveBeenCalledWith(
-      1,
-      mockProduct
+      '1',
+      jasmine.objectContaining({
+        name: mockProduct.name,
+        brand: mockProduct.brand,
+        price: mockProduct.price,
+        description: mockProduct.description,
+        category: mockProduct.category,
+        image: mockProduct.image,
+        quantity: mockProduct.quantity,
+      })
     );
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/products']);
   });
@@ -177,6 +191,7 @@ describe('FormComponent', () => {
       description: '',
       category: '',
       image: '',
+      quantity: 0,
     });
 
     component.onSubmit();

@@ -19,22 +19,24 @@ describe('ListComponent', () => {
 
   const mockProducts: Product[] = [
     {
-      id: 1,
+      id: '1',
       name: 'Product A',
       brand: 'Brand X',
       price: 100,
       description: 'Desc A',
       category: 'Cat A',
       image: '',
+      quantity: 4,
     },
     {
-      id: 2,
+      id: '2',
       name: 'Product B',
       brand: 'Brand Y',
       price: 200,
       description: 'Desc B',
       category: 'Cat B',
       image: '',
+      quantity: 4,
     },
   ];
 

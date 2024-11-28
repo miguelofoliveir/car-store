@@ -22,13 +22,14 @@ describe('ProductsService', () => {
   it('should fetch products', () => {
     const mockProducts: Product[] = [
       {
-        id: 1,
+        id: '1',
         name: 'Test Product',
         brand: 'Brand A',
         price: 100,
         description: '',
         category: 'Category',
         image: '',
+        quantity: 4,
       },
     ];
 
