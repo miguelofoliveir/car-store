@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { UserRoleService } from './user-role.service';
 import { UserRole } from './user-role.model';
+import { environment } from 'src/environments/environment';
 
 describe('UserRoleService', () => {
   let service: UserRoleService;
@@ -38,7 +39,7 @@ describe('UserRoleService', () => {
       expect(users).toEqual(mockUsers);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/users');
+    const req = httpMock.expectOne(`${environment.apiUrl}/users`);
     expect(req.request.method).toBe('GET');
     req.flush(mockUsers);
   });
@@ -56,7 +57,7 @@ describe('UserRoleService', () => {
       expect(user).toEqual(mockUser);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/users/1');
+    const req = httpMock.expectOne(`${environment.apiUrl}/users/1`);
     expect(req.request.method).toBe('GET');
     req.flush(mockUser);
   });
@@ -73,7 +74,7 @@ describe('UserRoleService', () => {
       expect(user).toEqual(newUser);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/users');
+    const req = httpMock.expectOne(`${environment.apiUrl}/users`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(newUser);
     req.flush(newUser);
@@ -92,7 +93,7 @@ describe('UserRoleService', () => {
       expect(user).toEqual(updatedUser);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/users/1');
+    const req = httpMock.expectOne(`${environment.apiUrl}/users/1`);
     expect(req.request.method).toBe('PUT');
     expect(req.request.body).toEqual(updatedUser);
     req.flush(updatedUser);
@@ -103,7 +104,7 @@ describe('UserRoleService', () => {
       expect(response).toBeNull();
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/users/1');
+    const req = httpMock.expectOne(`${environment.apiUrl}/users/1`);
     expect(req.request.method).toBe('DELETE');
     req.flush(null);
   });

@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { ProductsService } from './products.service';
 import { Product } from './product.model';
+import { environment } from 'src/environments/environment';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -38,7 +39,7 @@ describe('ProductsService', () => {
       expect(products).toEqual(mockProducts);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/products');
+    const req = httpMock.expectOne(`${environment.apiUrl}/products`);
     expect(req.request.method).toBe('GET');
     req.flush(mockProducts);
   });

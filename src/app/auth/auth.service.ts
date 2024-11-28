@@ -3,15 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/users';
+  private apiUrl = `${environment.apiUrl}/users`;
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<boolean> {
+    console.log('Current API URL:', environment.apiUrl);
+console.log('Production Mode:', environment.production);
     return this.http.get<any[]>(this.apiUrl).pipe(
       map((users) => {
         const user = users.find(

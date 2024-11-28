@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { OrdersService } from './orders.service';
 import { Order } from './order.model';
+import { environment } from 'src/environments/environment';
 
 describe('OrdersService', () => {
   let service: OrdersService;
@@ -46,7 +47,7 @@ describe('OrdersService', () => {
       expect(order).toEqual(mockOrder);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/orders');
+    const req = httpMock.expectOne(`${environment.apiUrl}/orders`);
     expect(req.request.method).toBe('POST');
     req.flush(mockOrder);
   });
@@ -60,7 +61,7 @@ describe('OrdersService', () => {
     });
 
     const req = httpMock.expectOne(
-      `http://localhost:3000/products/${productId}`
+      `${environment.apiUrl}/products/${productId}`
     );
     expect(req.request.method).toBe('PATCH');
     expect(req.request.body).toEqual({ quantity: newQuantity });
@@ -75,7 +76,7 @@ describe('OrdersService', () => {
       expect(true).toBeTrue();
     });
 
-    const req = httpMock.expectOne(`http://localhost:3000/orders/${orderId}`);
+    const req = httpMock.expectOne(`${environment.apiUrl}/orders/${orderId}`);
     expect(req.request.method).toBe('PATCH');
     expect(req.request.body).toEqual({ status: newStatus });
     req.flush({});

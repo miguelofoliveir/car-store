@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Order } from './order.model';
 import { Product } from '../products/product.model';
 import { Client } from '../client/client.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrdersService {
-  private ordersUrl = 'http://localhost:3000/orders';
-  private productsUrl = 'http://localhost:3000/products';
+  private ordersUrl = `${environment.apiUrl}/orders`;
+  private productsUrl = `${environment.apiUrl}/products`;
 
   constructor(private http: HttpClient) {}
 
@@ -28,10 +29,10 @@ export class OrdersService {
 
   getProductById(productId: string): Observable<Product> {
     return this.http.get<Product>(`${this.productsUrl}/${productId}`);
-  }  
+  }
 
   getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>('http://localhost:3000/clients');
+    return this.http.get<Client[]>(`${environment.apiUrl}/clients`);
   }
 
   createOrder(order: Order): Observable<Order> {

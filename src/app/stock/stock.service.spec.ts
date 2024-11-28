@@ -5,11 +5,12 @@ import {
 } from '@angular/common/http/testing';
 import { StockService } from './stock.service';
 import { Product } from '../products/product.model';
+import { environment } from 'src/environments/environment';
 
 describe('StockService', () => {
   let service: StockService;
   let httpMock: HttpTestingController;
-  const apiUrl = 'http://localhost:3000/products';
+  const apiUrl = `${environment.apiUrl}/products`;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

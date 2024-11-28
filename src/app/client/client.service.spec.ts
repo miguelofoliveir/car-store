@@ -1,13 +1,23 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { ClientService } from './client.service';
 import { Client } from './client.model';
+import { environment } from '../../environments/environment';
 
 describe('ClientService', () => {
   let service: ClientService;
   let httpMock: HttpTestingController;
 
-  const mockClient: Client = { id: '1', name: 'John Doe', email: 'john@example.com', phone: '(99) 99999-9999', address: '123 Main St' };
+  const mockClient: Client = {
+    id: '1',
+    name: 'John Doe',
+    email: 'john@example.com',
+    phone: '(99) 99999-9999',
+    address: '123 Main St',
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,7 +38,7 @@ describe('ClientService', () => {
       expect(clients[0]).toEqual(mockClient);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/clients');
+    const req = httpMock.expectOne(`${environment.apiUrl}/clients`);
     expect(req.request.method).toBe('GET');
     req.flush([mockClient]);
   });
@@ -38,7 +48,7 @@ describe('ClientService', () => {
       expect(client).toEqual(mockClient);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/clients/1');
+    const req = httpMock.expectOne(`${environment.apiUrl}/clients/1`);
     expect(req.request.method).toBe('GET');
     req.flush(mockClient);
   });
@@ -48,7 +58,7 @@ describe('ClientService', () => {
       expect(client).toEqual(mockClient);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/clients');
+    const req = httpMock.expectOne(`${environment.apiUrl}/clients`);
     expect(req.request.method).toBe('POST');
     req.flush(mockClient);
   });
@@ -58,7 +68,7 @@ describe('ClientService', () => {
       expect(client).toEqual(mockClient);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/clients/1');
+    const req = httpMock.expectOne(`${environment.apiUrl}/clients/1`);
     expect(req.request.method).toBe('PUT');
     req.flush(mockClient);
   });
@@ -68,7 +78,7 @@ describe('ClientService', () => {
       expect(true).toBeTrue();
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/clients/1');
+    const req = httpMock.expectOne(`${environment.apiUrl}/clients/1`);
     expect(req.request.method).toBe('DELETE');
     req.flush({});
   });

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
   fetchData(): void {
     this.http
-      .get<any[]>('http://localhost:3000/products')
+      .get<any[]>(`${environment.apiUrl}/products`)
       .subscribe((products) => {
         this.totalProducts = products.length;
         this.lowStockData = products
@@ -30,7 +31,7 @@ export class DashboardComponent implements OnInit {
           .map((product) => ({ name: product.name, value: product.quantity }));
       });
 
-    this.http.get<any[]>('http://localhost:3000/orders').subscribe((orders) => {
+    this.http.get<any[]>(`${environment.apiUrl}/orders`).subscribe((orders) => {
       this.totalOrders = orders.length;
       const statusCounts = orders.reduce(
         (acc, order) => {
@@ -47,7 +48,7 @@ export class DashboardComponent implements OnInit {
     });
 
     this.http
-      .get<any[]>('http://localhost:3000/clients')
+      .get<any[]>(`${environment.apiUrl}/clients`)
       .subscribe((clients) => {
         this.totalClients = clients.length;
       });
