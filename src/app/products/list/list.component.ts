@@ -85,11 +85,8 @@ export class ListComponent implements OnInit {
   }
 
   onViewDetails(product: Product): void {
-    this.dialog.open(ModalComponent, {
-      data: {
-        component: DetailsComponent,
-        inputs: { product },
-      },
+    this.dialog.open(DetailsComponent, {
+      data: product
     });
   }
 }

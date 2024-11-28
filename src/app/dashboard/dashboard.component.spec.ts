@@ -9,6 +9,7 @@ import {
 } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../../environments/environment';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -54,17 +55,17 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
 
     const reqProducts = httpTestingController.expectOne(
-      'http://localhost:3000/products'
+      `${environment.apiUrl}/products`
     );
     reqProducts.flush(mockProducts);
 
     const reqOrders = httpTestingController.expectOne(
-      'http://localhost:3000/orders'
+      `${environment.apiUrl}/orders`
     );
     reqOrders.flush(mockOrders);
 
     const reqClients = httpTestingController.expectOne(
-      'http://localhost:3000/clients'
+      `${environment.apiUrl}/clients`
     );
     reqClients.flush(mockClients);
 

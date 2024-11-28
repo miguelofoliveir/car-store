@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListComponent } from './list.component';
 import { ProductsService } from '../products.service';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Product } from '../product.model';
 import { DetailsComponent } from '../details/details.component';
-import { ModalComponent } from 'src/app/shared/modal/modal.component';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -53,7 +52,7 @@ describe('ListComponent', () => {
       providers: [
         { provide: ProductsService, useValue: productsServiceSpy },
         { provide: Router, useValue: routerSpy },
-        { provide: MatDialog, useValue: dialogSpy },
+        { provide: MatDialog, useValue: dialogSpy }, 
       ],
       imports: [HttpClientTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
@@ -114,14 +113,10 @@ describe('ListComponent', () => {
 
   it('should open details modal', () => {
     const product = mockProducts[0];
-
     component.onViewDetails(product);
 
-    expect(dialog.open).toHaveBeenCalledWith(ModalComponent, {
-      data: {
-        component: DetailsComponent,
-        inputs: { product },
-      },
+    expect(dialog.open).toHaveBeenCalledWith(DetailsComponent, {
+      data: product,
     });
   });
 });

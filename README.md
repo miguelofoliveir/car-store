@@ -1,16 +1,21 @@
 CarStore
+
 CarStore is a comprehensive management system for products, orders, clients, user roles, and stock. It streamlines the process of managing a store by offering features tailored for administrators, sellers, and clients.
 
-🌟 About the Project
+About the Project
+
 This system is designed to provide an intuitive interface and role-based navigation, allowing users to efficiently manage their operations. Whether it's updating stock levels, tracking orders, or managing clients, CarStore ensures a smooth workflow.
 
 Technologies Used
+
 Framework: Angular 16.2.16
 Styling: TailwindCSS and Angular Material
 Charts: ngx-charts
 Mock API: JSON Server
 Programming Languages: TypeScript, HTML, SCSS
-🚀 Key Features
+
+Key Features
+
 Authentication
 Role-based access for Admin, Seller, and Client.
 Validation of credentials via a mock backend.
@@ -29,35 +34,47 @@ User Management
 Admin-exclusive feature for managing users and roles.
 Dashboard
 Displays key metrics and charts for an overview of system activity.
-⚙️ How to Run the Project
+
+How to Run the Project
+
 Prerequisites
+
 Node.js and npm installed.
 Angular CLI installed globally:
 npm install -g @angular/cli
+
 Steps to Run
+
 Clone the Repository:
 
 git clone https://github.com/miguelofoliveir/car-store.git
 cd car-store
 Install Dependencies:
-
 npm install
-Start JSON Server (Mock API):
 
+Run Local:
+Start JSON Server (Mock API):
 npm run start:json-server
 This will run the mock API at http://localhost:3000/.
 
 Start the Angular Application:
-
-npm start
+npm start or ng serve
 The app will be available at http://localhost:4200/.
 
-🧪 Running Tests
+Run production:
+ng serve --configuration=production
+The app will be available at http://localhost:4200/.
+
+Alternatively, access the live production app hosted on Vercel: 
+https://car-store-eight-black.vercel.app
+
+Running Tests
 Unit Tests
 Run the following command to execute unit tests using Karma:
 
 npm test
-📋 Features by User Role
+
+Features by User Role
 Admin:
 
 Full access to all features.
@@ -69,7 +86,8 @@ Limited permissions for specific management actions.
 Client:
 
 View-only access to their orders.
-📖 Project Structure
+Project Structure
+
 car-store/
 ├── src/
 │   ├── app/
@@ -88,7 +106,5 @@ car-store/
 ├── package.json                 # Dependencies and scripts
 ├── tailwind.config.js           # TailwindCSS configuration
 └── README.md                    # Project documentation
-🌟 Repository
-GitHub Repository
 
-Feel free to explore, contribute, or raise issues! 🚀
+Feel free to explore, contribute, or raise issues! 
