@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [ListComponent, FormComponent, DetailsComponent],
   imports: [
@@ -29,6 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     MatDialogModule,
     MatFormFieldModule,
+    SharedModule
   ],
 })
 export class ProductsModule {}

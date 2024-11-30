@@ -1,9 +1,8 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from '../products.service';
 import { Product } from '../product.model';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { DetailsComponent } from '../details/details.component';
 
 @Component({
@@ -29,6 +28,7 @@ export class ListComponent implements OnInit {
     brand: '',
     category: '',
   };
+  isLoading: boolean = false;
 
   constructor(
     private productsService: ProductsService,
@@ -41,10 +41,14 @@ export class ListComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.productsService.getProducts().subscribe((products: Product[]) => {
-      this.products = products;
-      this.filteredProducts = products;
-      this.extractCategories();
+    this.isLoading = true;
+    this.productsService.getProducts().subscribe({
+      next: (products: Product[]) => {
+        this.products = products;
+        this.filteredProducts = products;
+        this.extractCategories();
+      },
+      complete: () => (this.isLoading = false),
     });
   }
 
@@ -71,22 +75,30 @@ export class ListComponent implements OnInit {
   }
 
   onEdit(productId: number): void {
-    this.router.navigate(['/products/edit', productId]);
+    this.isLoading = true;
+    this.router.navigate(['/products/edit', productId]).then(() => {
+      this.isLoading = false;
+    });
   }
 
   onDelete(productId: number): void {
-    this.productsService.deleteProduct(productId).subscribe(() => {
-      this.loadProducts();
+    this.isLoading = true;
+    this.productsService.deleteProduct(productId).subscribe({
+      next: () => this.loadProducts(),
+      complete: () => (this.isLoading = false),
     });
   }
 
   onAdd(): void {
-    this.router.navigate(['/products/add']);
+    this.isLoading = true;
+    this.router.navigate(['/products/add']).then(() => {
+      this.isLoading = false;
+    });
   }
 
   onViewDetails(product: Product): void {
     this.dialog.open(DetailsComponent, {
-      data: product
+      data: product,
     });
   }
 }
