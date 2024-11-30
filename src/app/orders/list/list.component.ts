@@ -43,16 +43,16 @@ export class ListComponent implements OnInit {
   }
 
   applyFilters(): void {
-    if (this.role === 'client') {
-      this.filters.client = '';
-    }
-
     this.filteredOrders = this.orders.filter((order) => {
+      const matchesClient = this.filters.client
+        ? order.clientId.toLowerCase().includes(this.filters.client.toLowerCase())
+        : true;
       const matchesStatus =
         !this.filters.status || order.status === this.filters.status;
       const matchesDate =
         !this.filters.date || order.date === this.filters.date;
-      return matchesStatus && matchesDate;
+
+      return matchesClient && matchesStatus && matchesDate;
     });
   }
 

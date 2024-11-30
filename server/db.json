@@ -54,7 +54,7 @@
   "orders": [
     {
       "id": "1",
-      "client": "Cliente 1",
+      "clientId": "Cliente 1",
       "products": [
         {
           "id": "001d",
@@ -72,7 +72,7 @@
     },
     {
       "id": "7f72",
-      "client": "Miguel test",
+      "clientId": "Miguel test",
       "products": [
         {
           "id": "003d",
@@ -90,7 +90,7 @@
     },
     {
       "id": "f51b",
-      "client": "Miguel test",
+      "clientId": "Miguel test",
       "products": [
         {
           "id": "002d",
@@ -108,7 +108,7 @@
     },
     {
       "id": "b788",
-      "client": "Miguel test",
+      "clientId": "Miguel test",
       "products": [
         {
           "id": "003d",
@@ -126,7 +126,7 @@
     },
     {
       "id": "acb9",
-      "client": "Cliente 1",
+      "clientId": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -144,7 +144,7 @@
     },
     {
       "id": "e5ad",
-      "client": "Cliente 1",
+      "clientId": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -162,7 +162,7 @@
     },
     {
       "id": "ba1e",
-      "client": "Cliente 1",
+      "clientId": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -180,7 +180,7 @@
     },
     {
       "id": "c898",
-      "client": "Cliente 1",
+      "clientId": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -198,7 +198,7 @@
     },
     {
       "id": "55a3",
-      "client": "Miguel test",
+      "clientId": "Miguel test",
       "products": [
         {
           "id": "002d",
@@ -216,7 +216,7 @@
     },
     {
       "id": "fdb9",
-      "client": "Cliente 1",
+      "clientId": "Cliente 1",
       "products": [
         {
           "id": "002d",
@@ -234,7 +234,7 @@
     },
     {
       "id": "777c",
-      "client": "Miguel test",
+      "clientId": "Miguel test",
       "products": [
         {
           "id": "002d",
@@ -249,6 +249,42 @@
       ],
       "date": "2024-11-26",
       "status": "Completed"
+    },
+    {
+      "id": "8d04",
+      "clientId": "Cliente 2",
+      "products": [
+        {
+          "id": "003d",
+          "name": "Product 2",
+          "brand": "Brand B",
+          "price": 200,
+          "description": "Description of Product 2",
+          "category": "Category B",
+          "image": "https://forbes.com.br/wp-content/uploads/2020/08/Neg%C3%B3cios-CarrosdeLuxo-180820-Divulga%C3%A7%C3%A3o9-1.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-30",
+      "status": "Pending"
+    },
+    {
+      "id": "005e",
+      "clientId": "Cliente 1",
+      "products": [
+        {
+          "id": "003d",
+          "name": "Product 2",
+          "brand": "Brand B",
+          "price": 200,
+          "description": "Description of Product 2",
+          "category": "Category B",
+          "image": "https://forbes.com.br/wp-content/uploads/2020/08/Neg%C3%B3cios-CarrosdeLuxo-180820-Divulga%C3%A7%C3%A3o9-1.jpg",
+          "quantity": 1
+        }
+      ],
+      "date": "2024-11-30",
+      "status": "Pending"
     }
   ],
   "clients": [
