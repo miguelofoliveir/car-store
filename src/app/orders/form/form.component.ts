@@ -15,6 +15,7 @@ export class FormComponent implements OnInit {
   orderForm: FormGroup;
   products: Product[] = [];
   clients: Client[] = [];
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,18 +36,23 @@ export class FormComponent implements OnInit {
   }
 
   loadProducts(): void {
+    this.isLoading = true;
     this.ordersService.getProducts().subscribe((data: Product[]) => {
       this.products = data;
+      this.isLoading = false;
     });
   }
 
   loadClients(): void {
+    this.isLoading = true;
     this.ordersService.getClients().subscribe((data: Client[]) => {
       this.clients = data;
+      this.isLoading = false;
     });
   }
 
   onSave(): void {
+    this.isLoading = true;
     if (this.orderForm.valid) {
       const { clientId, productId, quantity, status } = this.orderForm.value;
       const selectedClient = this.clients.find(
@@ -95,6 +101,7 @@ export class FormComponent implements OnInit {
         }
       }
     }
+    this.isLoading = false;
   }
 
   createOrder(order: Order): void {
@@ -105,6 +112,8 @@ export class FormComponent implements OnInit {
   }
 
   onCancel(): void {
+    this.isLoading = true;
     this.router.navigate(['/orders']);
+    this.isLoading = false;
   }
 }

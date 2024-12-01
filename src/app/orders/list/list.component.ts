@@ -18,6 +18,7 @@ export class ListComponent implements OnInit {
     date: '',
   };
   role: string | null = null;
+  isLoading: boolean = false;
 
   constructor(
     private ordersService: OrdersService,
@@ -31,6 +32,7 @@ export class ListComponent implements OnInit {
   }
 
   fetchOrders(): void {
+    this.isLoading = true;
     this.ordersService.getOrders().subscribe((data: Order[]) => {
       if (this.role === 'client') {
         const clientName = this.authService.getUser()?.name;
@@ -39,13 +41,17 @@ export class ListComponent implements OnInit {
         this.orders = data;
       }
       this.filteredOrders = [...this.orders];
+      this.isLoading = false;
     });
   }
 
   applyFilters(): void {
+    this.isLoading = true;
     this.filteredOrders = this.orders.filter((order) => {
       const matchesClient = this.filters.client
-        ? order.clientId.toLowerCase().includes(this.filters.client.toLowerCase())
+        ? order.clientId
+            .toLowerCase()
+            .includes(this.filters.client.toLowerCase())
         : true;
       const matchesStatus =
         !this.filters.status || order.status === this.filters.status;
@@ -54,9 +60,12 @@ export class ListComponent implements OnInit {
 
       return matchesClient && matchesStatus && matchesDate;
     });
+    this.isLoading = false;
   }
 
   viewDetails(orderId: string): void {
+    this.isLoading = true;
     this.router.navigate(['/orders/details', orderId]);
+    this.isLoading = false;
   }
 }

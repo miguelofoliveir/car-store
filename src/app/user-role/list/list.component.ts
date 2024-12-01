@@ -12,6 +12,7 @@ export class ListComponent implements OnInit {
   users: UserRole[] = [];
   filteredUsers: UserRole[] = [];
   filters = { role: '' };
+  isLoading: boolean = false;
 
   constructor(
     private userRoleService: UserRoleService,
@@ -23,9 +24,11 @@ export class ListComponent implements OnInit {
   }
 
   fetchUsers(): void {
+    this.isLoading = true;
     this.userRoleService.getUsers().subscribe((data: UserRole[]) => {
       this.users = data;
       this.filteredUsers = [...this.users];
+      this.isLoading = false;
     });
   }
 
@@ -36,18 +39,24 @@ export class ListComponent implements OnInit {
   }
 
   addUser(): void {
+    this.isLoading = true;
     this.router.navigate(['/user-role/create']);
+    this.isLoading = false;
   }
 
   editUser(userId: string): void {
+    this.isLoading = true;
     this.router.navigate([`/user-role/edit/${userId}`]);
+    this.isLoading = false;
   }
 
   deleteUser(userId: string): void {
     if (confirm('Are you sure you want to delete this user?')) {
+      this.isLoading = true;
       this.userRoleService.deleteUser(userId).subscribe(() => {
         this.users = this.users.filter((user) => user.id !== userId);
         this.applyFilters();
+        this.isLoading = false;
       });
     }
   }

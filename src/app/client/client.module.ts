@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [ListComponent, FormComponent],
@@ -31,6 +32,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     MatIconModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    SharedModule,
   ],
   providers: [provideNgxMask()],
 })

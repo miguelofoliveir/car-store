@@ -16,6 +16,7 @@ export class ListComponent implements OnInit {
     name: '',
     lowStockThreshold: null as number | null,
   };
+  isLoading: boolean = false;
 
   constructor(private stockService: StockService, private dialog: MatDialog) {}
 
@@ -24,9 +25,11 @@ export class ListComponent implements OnInit {
   }
 
   loadProducts(): void {
+    this.isLoading = true;
     this.stockService.getProducts().subscribe((products: Product[]) => {
       this.products = products;
       this.filteredProducts = products;
+      this.isLoading = false;
     });
   }
 

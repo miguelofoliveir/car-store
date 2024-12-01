@@ -97,8 +97,10 @@ export class ListComponent implements OnInit {
   }
 
   onViewDetails(product: Product): void {
+    this.isLoading = true;
     this.dialog.open(DetailsComponent, {
       data: product,
     });
+    this.isLoading = false;
   }
 }

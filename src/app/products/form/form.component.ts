@@ -14,6 +14,7 @@ export class FormComponent implements OnInit {
   isEditMode = false;
   productId: string | null = null;
   imagePreview: string | ArrayBuffer | null = null;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -47,27 +48,12 @@ export class FormComponent implements OnInit {
     }
   }
 
-  onFileSelected(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      this.productForm.patchValue({ image: file });
-      this.productForm.get('image')?.updateValueAndValidity();
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
   onSubmit(): void {
+    this.isLoading = true;
     if (this.productForm.invalid) {
       return;
     }
-
     const productData: Product = this.productForm.value;
-
     if (this.isEditMode && this.productId) {
       this.productsService
         .updateProduct(this.productId, productData)
@@ -79,9 +65,12 @@ export class FormComponent implements OnInit {
         this.router.navigate(['/products']);
       });
     }
+    this.isLoading = false;
   }
 
   onCancel(): void {
+    this.isLoading = true;
     this.router.navigate(['/products']);
+    this.isLoading = false;
   }
 }
