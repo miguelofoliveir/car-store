@@ -15,6 +15,7 @@ import { ListComponent } from './list.component';
 import { OrdersService } from '../orders.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Order } from '../order.model';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -42,6 +43,7 @@ describe('ListComponent', () => {
         MatIconModule,
         BrowserAnimationsModule,
         FormsModule,
+        SharedModule,
       ],
       providers: [
         { provide: OrdersService, useValue: mockOrdersService },

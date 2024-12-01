@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -32,6 +33,7 @@ describe('ListComponent', () => {
         MatIconModule,
         FormsModule,
         BrowserAnimationsModule,
+        SharedModule,
       ],
       providers: [
         { provide: UserRoleService, useValue: mockUserRoleService },

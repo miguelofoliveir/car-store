@@ -76,9 +76,7 @@ export class ListComponent implements OnInit {
 
   onEdit(productId: number): void {
     this.isLoading = true;
-    this.router.navigate(['/products/edit', productId]).then(() => {
-      this.isLoading = false;
-    });
+    this.router.navigate(['/products/edit', productId]);
   }
 
   onDelete(productId: number): void {
@@ -91,9 +89,7 @@ export class ListComponent implements OnInit {
 
   onAdd(): void {
     this.isLoading = true;
-    this.router.navigate(['/products/add']).then(() => {
-      this.isLoading = false;
-    });
+    this.router.navigate(['/products/add']);
   }
 
   onViewDetails(product: Product): void {

@@ -29,7 +29,7 @@ describe('StockModalComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        BrowserAnimationsModule,
+        BrowserAnimationsModule
       ],
       providers: [
         { provide: StockService, useValue: stockServiceMock },
