@@ -8,6 +8,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Product } from '../product.model';
 import { DetailsComponent } from '../details/details.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -54,7 +55,7 @@ describe('ListComponent', () => {
         { provide: Router, useValue: routerSpy },
         { provide: MatDialog, useValue: dialogSpy }, 
       ],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, SharedModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 

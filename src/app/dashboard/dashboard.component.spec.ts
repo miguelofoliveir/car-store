@@ -10,6 +10,7 @@ import {
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../../environments/environment';
+import { SharedModule } from '../shared/shared.module';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -25,6 +26,7 @@ describe('DashboardComponent', () => {
         NgxChartsModule,
         BrowserAnimationsModule,
         HttpClientTestingModule,
+        SharedModule,
       ],
     }).compileComponents();
 

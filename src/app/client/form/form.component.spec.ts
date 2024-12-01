@@ -8,6 +8,7 @@ import { Client } from '../client.model';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -51,6 +52,7 @@ describe('FormComponent', () => {
         MatInputModule,
         MatButtonModule,
         BrowserAnimationsModule,
+        SharedModule,
       ],
       providers: [
         { provide: ClientService, useValue: mockClientService },

@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductsService } from '../products.service';
 import { FormComponent } from './form.component';
 import { Product } from '../product.model';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -35,6 +36,7 @@ describe('FormComponent', () => {
         MatInputModule,
         MatButtonModule,
         BrowserAnimationsModule,
+        SharedModule,
       ],
       providers: [
         { provide: ProductsService, useValue: productServiceSpy },

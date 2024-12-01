@@ -39,16 +39,6 @@
       "category": "Test product",
       "image": "https://nxboats.com.br/wp-content/uploads/2023/11/bugatti.jpg",
       "quantity": 9
-    },
-    {
-      "id": "5f3b",
-      "name": "Product 10",
-      "brand": "Brand 10",
-      "price": 50,
-      "description": "Testing",
-      "category": "Test category",
-      "image": "test.png",
-      "quantity": 10
     }
   ],
   "orders": [

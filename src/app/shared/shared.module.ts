@@ -6,11 +6,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from './footer/footer.component';
-import { ModalComponent } from './modal/modal.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, ModalComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    LoadingComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -18,7 +23,8 @@ import { ModalComponent } from './modal/modal.component';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
   ],
-  exports: [HeaderComponent, FooterComponent],
+  exports: [HeaderComponent, FooterComponent, LoadingComponent],
 })
 export class SharedModule {}

@@ -62,8 +62,19 @@
           >
         </mat-form-field>
 
-        <button mat-raised-button color="primary" class="w-full" type="submit">
-          Login
+        <button
+          mat-raised-button
+          color="primary"
+          class="w-full"
+          type="submit"
+          [disabled]="isLoading"
+        >
+          <ng-container *ngIf="!isLoading; else loadingTemplate"
+            >Login</ng-container
+          >
+          <ng-template #loadingTemplate>
+            <mat-spinner diameter="20" color="accent"></mat-spinner>
+          </ng-template>
         </button>
       </form>
     </div>

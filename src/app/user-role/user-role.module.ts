@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [ListComponent, FormComponent],
@@ -30,6 +31,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTableModule,
     MatCardModule,
     MatSnackBarModule,
+    SharedModule,
   ],
 })
 export class UserRoleModule {}

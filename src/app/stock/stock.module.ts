@@ -11,6 +11,7 @@ import { StockRoutingModule } from './stock-routing.module';
 import { ListComponent } from './list/list.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StockModalComponent } from './stock-modal/stock-modal.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [ListComponent, StockModalComponent],
@@ -25,6 +26,7 @@ import { StockModalComponent } from './stock-modal/stock-modal.component';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
+    SharedModule,
   ],
 })
 export class StockModule {}

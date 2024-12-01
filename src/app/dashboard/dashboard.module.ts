@@ -6,19 +6,17 @@ import { DashboardComponent } from './dashboard.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    DashboardComponent
-  ],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    SharedModule,
     MatCardModule,
     MatButtonModule,
-    NgxChartsModule
-    
-  ]
+    NgxChartsModule,
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

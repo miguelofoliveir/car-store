@@ -11,6 +11,7 @@ import { Product } from 'src/app/products/product.model';
 })
 export class StockModalComponent {
   stockForm: FormGroup;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -19,14 +20,12 @@ export class StockModalComponent {
     @Inject(MAT_DIALOG_DATA) public product: Product
   ) {
     this.stockForm = this.fb.group({
-      quantity: [
-        product.quantity,
-        [Validators.required, Validators.min(0)],
-      ],
+      quantity: [product.quantity, [Validators.required, Validators.min(0)]],
     });
   }
 
   onSave(): void {
+    this.isLoading = true;
     if (this.stockForm.invalid) {
       return;
     }
@@ -36,11 +35,14 @@ export class StockModalComponent {
     this.stockService
       .updateProductQuantity(this.product.id!, updatedQuantity)
       .subscribe(() => {
-        this.dialogRef.close(true); 
+        this.dialogRef.close(true);
       });
+    this.isLoading = false;
   }
 
   onCancel(): void {
-    this.dialogRef.close(false); 
+    this.isLoading = true;
+    this.dialogRef.close(false);
+    this.isLoading = false;
   }
 }

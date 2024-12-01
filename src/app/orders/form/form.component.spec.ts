@@ -14,6 +14,7 @@ import { FormComponent } from './form.component';
 import { of } from 'rxjs';
 import { Product } from '../../products/product.model';
 import { Client } from '../../client/client.model';
+import { SharedModule } from 'src/app/shared/shared.module';
 @Component({ template: '' })
 class DummyComponent {}
 
@@ -43,6 +44,7 @@ describe('FormComponent', () => {
         MatButtonModule,
         MatSelectModule,
         BrowserAnimationsModule,
+        SharedModule,
         RouterTestingModule.withRoutes(routes),
       ],
       providers: [{ provide: OrdersService, useValue: mockOrdersService }],

@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -48,6 +49,7 @@ describe('ListComponent', () => {
         MatButtonModule,
         FormsModule,
         BrowserAnimationsModule,
+        SharedModule,
       ],
       providers: [
         { provide: ClientService, useValue: mockClientService },
